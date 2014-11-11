@@ -1,0 +1,21 @@
+%h1 Listing releases
+
+%table
+  %tr
+    %th Version
+    %th Comments
+    %th
+    %th
+    %th
+
+  - @releases.each do |release|
+    %tr
+      %td= release.version
+      %td= release.comments
+      %td= link_to 'Show', release
+      %td= link_to 'Edit', edit_release_path(release)
+      %td= link_to 'Destroy', release, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Release', new_release_path

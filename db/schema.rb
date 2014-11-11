@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141110220500) do
+ActiveRecord::Schema.define(version: 20141111095816) do
 
   create_table "customers", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "deployments", force: true do |t|
+    t.date     "deploy_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "releases", force: true do |t|
+    t.integer  "version"
+    t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Deploy date:
+  = @deployment.deploy_date
+
+= link_to 'Edit', edit_deployment_path(@deployment)
+\|
+= link_to 'Back', deployments_path

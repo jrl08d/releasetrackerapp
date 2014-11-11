@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Version:
+  = @release.version
+%p
+  %b Comments:
+  = @release.comments
+
+= link_to 'Edit', edit_release_path(@release)
+\|
+= link_to 'Back', releases_path
