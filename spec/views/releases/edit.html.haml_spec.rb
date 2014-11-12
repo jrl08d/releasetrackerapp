@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "releases/edit", :type => :view do
   before(:each) do
     @release = assign(:release, Release.create!(
-      :version => 1,
+      :version => "9.99",
       :comments => "MyText"
     ))
   end
