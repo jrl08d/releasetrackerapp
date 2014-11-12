@@ -3,6 +3,9 @@
 %p
   %b Deploy date:
   = @deployment.deploy_date
+%p
+  %b Customer:
+  = @deployment.customer.name
 
 = link_to 'Edit', edit_deployment_path(@deployment)
 \|

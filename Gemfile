@@ -38,6 +38,8 @@ group :development, :test do
 end
 
 
+gem 'simple_form'
+
 gem "haml-rails"
 
 # Use Capistrano for deployment

@@ -1,4 +1,4 @@
-= form_for @deployment do |f|
+= simple_form_for @deployment do |f|
   - if @deployment.errors.any?
     #error_explanation
       %h2= "#{pluralize(@deployment.errors.count, "error")} prohibited this deployment from being saved:"
@@ -8,6 +8,10 @@
 
   .field
     = f.label :deploy_date
-    = f.date_select :deploy_date
+    = f.date_select :deploy_date  
+    .field
+    = f.association :customer    
+    .field
+    = f.association :release, :label_method => :version, :value_method => :id
   .actions
     = f.submit 'Save'

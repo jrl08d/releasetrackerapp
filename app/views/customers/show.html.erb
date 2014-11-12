@@ -5,5 +5,15 @@
   <%= @customer.name %>
 </p>
 
+
+<% @customer.deployments.each do |u| %>
+	<p><%= u.deploy_date %>
+<%end %>
+
+<% @customer.releases.each do |u| %>
+	<p><%= u.version %>
+<%end %>
+
+
 <%= link_to 'Edit', edit_customer_path(@customer) %> |
 <%= link_to 'Back', customers_path %>

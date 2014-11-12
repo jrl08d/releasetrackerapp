@@ -4,6 +4,7 @@ class DeploymentsController < ApplicationController
   # GET /deployments
   # GET /deployments.json
   def index
+    @customers = Customer.all
     @deployments = Deployment.all
   end
 
@@ -19,12 +20,14 @@ class DeploymentsController < ApplicationController
 
   # GET /deployments/1/edit
   def edit
+    @customer = Customer.find(params[:customer_id])
   end
 
   # POST /deployments
   # POST /deployments.json
   def create
     @deployment = Deployment.new(deployment_params)
+    @customer = @deployment.customer
 
     respond_to do |format|
       if @deployment.save
@@ -54,6 +57,7 @@ class DeploymentsController < ApplicationController
   # DELETE /deployments/1
   # DELETE /deployments/1.json
   def destroy
+    @customer = @deployment.customer
     @deployment.destroy
     respond_to do |format|
       format.html { redirect_to deployments_url, notice: 'Deployment was successfully destroyed.' }
@@ -69,6 +73,6 @@ class DeploymentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def deployment_params
-      params.require(:deployment).permit(:deploy_date)
+      params.require(:deployment).permit(:deploy_date, :customer_id, :release_id)
     end
 end
