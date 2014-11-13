@@ -1,11 +1,7 @@
 
-= simple_form_for(@deployment, html: {class: 'form-horizontal' }) do |f|
-  - if @deployment.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@deployment.errors.count, "error")} prohibited this deployment from being saved:"
-      %ul
-        - @deployment.errors.full_messages.each do |msg|
-          %li= msg
+= simple_form_for(@deployment, :html => { class: "form-group" }) do |f|
+  = f.error_notification
+
 
   .field
     

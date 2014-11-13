@@ -1,11 +1,5 @@
-.container
-= simple_form_for(@release, html: { class: 'form-horizontal' }) do |f|
-  - if @release.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@release.errors.count, "error")} prohibited this release from being saved:"
-      %ul
-        - @release.errors.full_messages.each do |msg|
-          %li= msg
+= simple_form_for(@release, :html => { class: "form-group" }) do |f|
+  = f.error_notification
 
   .form-group
     

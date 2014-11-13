@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112161309) do
+ActiveRecord::Schema.define(version: 20141113214328) do
 
   create_table "customers", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "customers", ["name"], name: "index_customers_on_name"
 
   create_table "deployments", force: true do |t|
     t.date     "deploy_date"
@@ -27,11 +29,16 @@ ActiveRecord::Schema.define(version: 20141112161309) do
     t.integer  "release_id"
   end
 
+  add_index "deployments", ["customer_id"], name: "index_deployments_on_customer_id"
+  add_index "deployments", ["release_id"], name: "index_deployments_on_release_id"
+
   create_table "releases", force: true do |t|
     t.string   "version"
     t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "releases", ["version"], name: "index_releases_on_version"
 
 end
