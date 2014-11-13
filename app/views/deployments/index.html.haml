@@ -1,5 +1,7 @@
 %h1 Listing deployments
 
+= select("customer", "name", Customer::NAMES, {include_blank: true})
+
 %table
   %tr
     %th Customer
@@ -22,6 +24,5 @@
 
 %br
 
-= link_to 'New Deployment', new_deployment_path
-= link_to 'New Customer', new_customer_path
-= link_to 'New Release', new_release_path
+= link_to 'List of Customers', customers_path
+

@@ -4,15 +4,15 @@
   %thead
     %tr
       %th Name
-      %th Deployment Date
+      %th Most Recent Deployment
       %th Version
       %th{:colspan => 2}
   %tbody
     - @customers.each do |customer| 
       %tr
         %td= customer.name 
-        %td= customer.deployments.collect { |a| a.deploy_date }
-        %td= customer.releases.collect { |a| a.version }
+        %td= customer.deployments.collect { |a| a.deploy_date }.max
+        %td= customer.releases.collect { |a| a.version }.max
         %td= link_to 'Edit Customer & Deployment', edit_customer_path(customer) 
         %td= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } 
       
@@ -21,4 +21,5 @@
 
 = link_to 'New Customer', new_customer_path
 = link_to "Add Release", new_release_path
-= link_to "Add Deployment", new_deployment_path
+= link_to "Deployment History", deployments_path
+

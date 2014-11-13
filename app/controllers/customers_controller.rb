@@ -5,12 +5,13 @@ class CustomersController < ApplicationController
   # GET /customers.json
   def index
     @customers = Customer.all
-    @deployments = Deployment.all
+    @deployments = Deployment.order("created_at DESC").limit(1)
   end
 
   # GET /customers/1
   # GET /customers/1.json
   def show
+    @deployments = Deployment.order("created_at DESC").limit(1)
   end
 
   # GET /customers/new
@@ -20,7 +21,9 @@ class CustomersController < ApplicationController
 
   # GET /customers/1/edit
   def edit
-    @deployment = Deployment.new
+
+    @deployment = @customer.deployments.build
+
   end
 
   # POST /customers
