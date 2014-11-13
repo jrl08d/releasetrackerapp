@@ -13,14 +13,14 @@
         %td= customer.name 
         %td= customer.deployments.collect { |a| a.deploy_date }.max
         %td= customer.releases.collect { |a| a.version }.max
-        %td= link_to 'Edit Customer & Deployment', edit_customer_path(customer) 
-        %td= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } 
+        %td= link_to content_tag(:i,nil, :class=>"fa fa-edit"), edit_customer_path(customer), :class => "btn btn-link", :title =>"Edit Customer & Deployment"
+        %td= link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), customer, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-link"
       
 
 %br
 
-= link_to 'New Customer', new_customer_path
-= link_to "Add Release", new_release_path
-= link_to "Deployment History", deployments_path
-= link_to "Release History", releases_path
+= link_to 'Add Customer', new_customer_path, :class => "btn btn-link"
+= link_to "Add Release", new_release_path, :class => "btn btn-link"
+= link_to "Deployment History", deployments_path, :class => "btn btn-link"
+= link_to "Release History", releases_path, :class => "btn btn-link"
 

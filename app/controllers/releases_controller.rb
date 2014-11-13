@@ -28,7 +28,7 @@ class ReleasesController < ApplicationController
 
     respond_to do |format|
       if @release.save
-        format.html { redirect_to @release, notice: 'Release was successfully created.' }
+        format.html { redirect_to releases_path, notice: 'Release was successfully created.' }
         format.json { render :show, status: :created, location: @release }
       else
         format.html { render :new }

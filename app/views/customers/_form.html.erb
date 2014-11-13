@@ -2,18 +2,19 @@
   <%= f.error_notification %>
 
 
-<div class="form-inputs">
+<div class="form-group">
 
-    <%= f.input :name, placeholder: 'Name of Client' %>
+    <%= f.input :name, placeholder: 'Name of Client', :required => true %>
 
  
   
     <br>
 
-    <%= f.submit @customer.new_record? ? "Submit" : "Edit Name", :class => 'btn btn-info' %>
+    <%= f.button :submit, :class => 'btn btn-info' %>
 
 </div>
 
 
 <% end %>
+<br>
 

@@ -9,9 +9,9 @@
   .field
     
     = f.text_field :deploy_date, as: :datepicker, type: "date", class: 'form-control'
-    .field
-    = f.hidden_field :customer    
-    .field
+  .hidden 
+    = f.association :customer, class: "hidden"
+  .field
     = f.association :release, :label_method => :version, :value_method => :id
   .actions
     = f.submit @deployment.new_record? ? "Submit" : "Submit Deployment", :class => 'btn btn-info' 

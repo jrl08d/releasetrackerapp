@@ -4,12 +4,14 @@ class DeploymentsController < ApplicationController
   # GET /deployments
   # GET /deployments.json
   def index
+     @customers = Customer.all
     if params[:customer_id]
       @customer = Customer.find(params[:customer_id])
       @deployments = @customer.deployments
     else
       @deployments = Deployment.all
     end
+
   end
 
   # GET /deployments/1
@@ -35,7 +37,7 @@ class DeploymentsController < ApplicationController
 
     respond_to do |format|
       if @deployment.save
-        format.html { redirect_to @deployment, notice: 'Deployment was successfully created.' }
+        format.html { redirect_to deployments_path, notice: 'Deployment was successfully created.' }
         format.json { render :show, status: :created, location: @deployment }
       else
         format.html { render :new }

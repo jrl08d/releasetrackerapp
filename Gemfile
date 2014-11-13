@@ -32,6 +32,8 @@ gem 'spring',        group: :development
 # Use unicorn as the app server
 # gem 'unicorn'
 
+gem "erb2haml", :group => :development
+
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
@@ -41,7 +43,7 @@ end
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3.1'
 
-
+gem 'font-awesome-sass', '~> 4.2.0'
 
 
 gem 'simple_form', github: 'plataformatec/simple_form', branch: 'master'
