@@ -3,4 +3,5 @@ class Customer < ActiveRecord::Base
 	has_many :releases, through: :deployments
 	accepts_nested_attributes_for :deployments
 	accepts_nested_attributes_for :releases
+	validates_presence_of :name
 end

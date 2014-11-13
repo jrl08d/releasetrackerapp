@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @customer.name
+- @customer.deployments.each do |u|
+  %p
+    = u.deploy_date
+- @customer.releases.each do |u|
+  %p
+    = u.version
+= link_to 'Edit', edit_customer_path(@customer)
+|
+\#{link_to 'Back', customers_path}

@@ -4,4 +4,5 @@ class Deployment < ActiveRecord::Base
 	accepts_nested_attributes_for :customer
 	accepts_nested_attributes_for :release
 	validates_presence_of :deploy_date
+	validates :release_id,  :presence => true, :on => :update
 end

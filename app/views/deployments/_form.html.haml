@@ -1,3 +1,4 @@
+
 = simple_form_for(@deployment, html: {class: 'form-horizontal' }) do |f|
   - if @deployment.errors.any?
     #error_explanation
@@ -8,10 +9,10 @@
 
   .field
     
-    = f.text_field :deploy_date, as: :datepicker, type: "date", class: 'form-control'
+    = f.text_field :deploy_date, as: :datepicker, type: "date", :required => true, class: 'form-control'
   .hidden 
     = f.association :customer, class: "hidden"
   .field
-    = f.association :release, :label_method => :version, :value_method => :id
+    = f.association :release, :label_method => :version, :value_method => :id,:required => true
   .actions
     = f.submit @deployment.new_record? ? "Submit" : "Submit Deployment", :class => 'btn btn-info' 
