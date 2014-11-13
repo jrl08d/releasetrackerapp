@@ -7,11 +7,11 @@
           %li= msg
 
   .field
-    = f.label :deploy_date
-    = f.date_select :deploy_date  
+    
+    = f.text_field :deploy_date, as: :datepicker, type: "date", class: 'form-control'
     .field
     = f.hidden_field :customer    
     .field
     = f.association :release, :label_method => :version, :value_method => :id
   .actions
-    = f.submit 'Save'
+    = f.submit @deployment.new_record? ? "Submit" : "Submit Deployment", :class => 'btn btn-info' 

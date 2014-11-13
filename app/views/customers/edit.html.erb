@@ -1,9 +1,11 @@
-<h1>Editing customer</h1>
+<h1>Editing <%= "#{@customer.name}" %></h1>
 
 <%= render 'form' %>
 
+<hr>
 
-<p> New Deployment
+
+<h4> Add Deployment for <%= "#{@customer.name}" %></h4>
 <%= render 'deployments/form' %>
 
 

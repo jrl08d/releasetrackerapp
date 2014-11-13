@@ -44,7 +44,9 @@ gem 'bootstrap-sass', '~> 3.3.1'
 
 
 
-gem 'simple_form'
+gem 'simple_form', github: 'plataformatec/simple_form', branch: 'master'
+
+gem "faker"
 
 gem "haml-rails"
 

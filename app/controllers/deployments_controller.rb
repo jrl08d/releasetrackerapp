@@ -4,8 +4,12 @@ class DeploymentsController < ApplicationController
   # GET /deployments
   # GET /deployments.json
   def index
-
-    @deployments = Deployment.all
+    if params[:customer_id]
+      @customer = Customer.find(params[:customer_id])
+      @deployments = @customer.deployments
+    else
+      @deployments = Deployment.all
+    end
   end
 
   # GET /deployments/1
