@@ -4,7 +4,7 @@ class DeploymentsController < ApplicationController
   # GET /deployments
   # GET /deployments.json
   def index
-    @customers = Customer.all
+
     @deployments = Deployment.all
   end
 

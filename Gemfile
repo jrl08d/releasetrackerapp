@@ -42,6 +42,8 @@ gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3.1'
 
 
+
+
 gem 'simple_form'
 
 gem "haml-rails"

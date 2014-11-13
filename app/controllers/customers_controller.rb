@@ -4,7 +4,7 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
   def index
-    @customers = Customer.all
+    @customers = Customer.order('name ASC')
     @deployments = Deployment.order("created_at DESC").limit(1)
   end
 
