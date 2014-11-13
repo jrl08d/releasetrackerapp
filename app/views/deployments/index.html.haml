@@ -21,7 +21,7 @@
 
   - @deployments.each do |deployment|
     %tr
-      %td= deployment.customer.name
+      %td= deployment.customer.name if deployment.customer
       %td= deployment.deploy_date
       %td= deployment.release.version
      

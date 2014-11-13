@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   resources :deployments
 
+  root to: "customers#index"
+
   resources :customers do 
     resources :deployments
   end
