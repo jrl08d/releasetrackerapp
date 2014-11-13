@@ -20,7 +20,7 @@ class DeploymentsController < ApplicationController
 
   # GET /deployments/1/edit
   def edit
-    @customer = Customer.find(params[:customer_id])
+    
   end
 
   # POST /deployments

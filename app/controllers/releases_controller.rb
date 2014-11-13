@@ -4,7 +4,7 @@ class ReleasesController < ApplicationController
   # GET /releases
   # GET /releases.json
   def index
-    @releases = Release.all
+    @releases = Release.order("version ASC")
   end
 
   # GET /releases/1

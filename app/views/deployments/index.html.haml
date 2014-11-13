@@ -1,13 +1,12 @@
 %h1 Listing deployments
 
 
-%table
+%table.table
   %tr
     %th Customer
     %th Deployment Date
     %th Version
-    %th
-    %th
+    
     %th
 
 
@@ -17,8 +16,7 @@
       %td= deployment.customer.name
       %td= deployment.deploy_date
       %td= deployment.release.version
-      %td= link_to 'Show', deployment
-      %td= link_to 'Edit', edit_deployment_path(deployment)
+     
       %td= link_to 'Destroy', deployment, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
