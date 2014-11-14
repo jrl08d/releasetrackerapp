@@ -35,26 +35,19 @@ gem 'spring',        group: :development
 gem "erb2haml", :group => :development
 
 
+
+gem 'autoprefixer-rails'
+gem 'bootstrap-sass', '~> 3.3.1'
+gem 'font-awesome-sass', '~> 4.2.0'
+gem 'simple_form', github: 'plataformatec/simple_form', branch: 'master'
+gem "faker"
+gem "haml-rails"
+
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
 end
 
-
-gem 'autoprefixer-rails'
-gem 'bootstrap-sass', '~> 3.3.1'
-
-gem 'font-awesome-sass', '~> 4.2.0'
-
-
-gem 'simple_form', github: 'plataformatec/simple_form', branch: 'master'
-
-gem "faker"
-
-gem "haml-rails"
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
+group :test do
+  gem 'shoulda-matchers', require: false
+end
