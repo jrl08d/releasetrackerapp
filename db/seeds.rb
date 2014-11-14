@@ -28,8 +28,7 @@ if Rails.env != 'production'
     FactoryGirl.create :release, version: "#{i + 1}.0.0"
   end
 
-  #5.times do
-  #  FactoryGirl.create :deployment
-  #end
-
+  15.times do
+    FactoryGirl.create :deployment
+  end
 end

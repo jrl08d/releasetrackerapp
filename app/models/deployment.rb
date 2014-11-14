@@ -6,7 +6,7 @@ class Deployment < ActiveRecord::Base
 	accepts_nested_attributes_for :release
   
 	validates_presence_of :deploy_date
-	validates :release_id,  presence:true, uniqueness:true
+	validates :release_id,  presence:true, uniqueness: {scope: :customer_id}
 
 
 	def self.to_csv
