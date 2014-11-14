@@ -5,7 +5,7 @@
 
   .field
     
-    = f.text_field :deploy_date, as: :datepicker, type: "date", :required => true, class: 'form-control'
+    = f.text_field :deploy_date, as: :datepicker, type: "date", value: "#{Date.today}", :required => true, class: 'form-control'
   .hidden 
     = f.association :customer, class: "hidden"
   .field

@@ -11,7 +11,10 @@ class DeploymentsController < ApplicationController
     else
       @deployments = Deployment.all
     end
-
+    respond_to do |format|
+      format.html
+      format.csv { render text: @deployments.to_csv }
+    end
   end
 
   # GET /deployments/1
