@@ -1,5 +1,11 @@
-<%- headers = ['Name', 'Email'] -%>
-<%= CSV.generate_line headers %>
-<%- @query.each do |user| -%>
-  <%= CSV.generate_line([user.name, user.email]) %>
-<%- end -%>
+<%=
+CSV.generate do |csv|
+	csv << ["Customer Name", "Deployment History", "Release/Version History"]
+	@customers.each do |customer|
+		csv << [
+				customer.name, customer.deployments.collect { |a| a.deploy_date },
+				customer.releases.collect { |a| a.version }
+		]
+	end
+end.html_safe
+%>

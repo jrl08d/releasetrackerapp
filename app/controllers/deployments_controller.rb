@@ -4,12 +4,12 @@ class DeploymentsController < ApplicationController
   # GET /deployments
   # GET /deployments.json
   def index
-     @customers = Customer.all
+     @customers = Customer.order('name ASC')
     if params[:customer_id]
       @customer = Customer.find(params[:customer_id])
-      @deployments = @customer.deployments
+      @deployments = @customer.deployments.order
     else
-      @deployments = Deployment.all
+      @deployments = Deployment.order('deploy_date DESC')
     end
     respond_to do |format|
       format.html
