@@ -14,15 +14,30 @@ RSpec.describe "Deployments lookup" do
     Deployment.count.should == @deployments_count
   end
 
-  it "should allow filtering of customers", focus: true do
+
+  pending "should should list of deployments"
+
+
+  it "should allow filtering of customers" do
     visit '/deployments'
 
     page.should have_selector('table tr', count: @deployments_count)
 
-    select Customer.last.name, from: :customer_id
+    customer = Customer.last
+
+    select customer.name, from: :customer_id
     click_on 'Filter'
 
-    page.should have_selector('table tr', :count => 1)
+    page.should have_selector('table tr', :count => customer.deployments.count)
+  end
+
+  it "should allow clearing of filter" do
+    visit '/deployments'
+
+    find('select#customer_id').find("option[value='']").select_option
+    click_on 'Filter'
+
+    page.should have_selector('table tr', :count => @deployments_count)
   end
 
 end
