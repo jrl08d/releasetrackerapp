@@ -1,18 +1,25 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
 
+
   # GET /customers
   # GET /customers.json
   def index
-    @search = Customer.search(params[:q])
-    @customers = @search.result.paginate(:page => params[:page], :per_page => 12)
-    @deployments = Deployment.order("created_at DESC").limit(1)
-    Resque.enqueue(CSVExportJob)
-    
-
-   respond_to do |format|
-      format.html
-      format.csv { render :csv => @customers }
+    if  request.format == "csv"
+      @customers = Customer.order("name ASC")
+      respond_to do |format|
+        format.html
+        format.csv { render :csv => @customers}
+      end
+    else
+      @search = Customer.search(params[:q])
+      @customers = @search.result.paginate(:page => params[:page], :per_page => 12)
+      @deployments = Deployment.order("created_at DESC").limit(1)
+      Resque.enqueue(CSVExportJob)
+      respond_to do |format|
+        format.html
+        format.csv { render :csv => @customers}
+      end
     end
   end
 
