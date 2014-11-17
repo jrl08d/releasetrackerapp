@@ -4,7 +4,7 @@ RSpec.describe Deployment, :type => :model do
 
   context 'indexes' do
     pending { should have_index(:release_id) }
-    pending { should have_index(:customer_id) }
+    it { should have_index(:customer_id) }
   end
 
   context 'associations' do
