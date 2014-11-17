@@ -7,7 +7,7 @@ class DeploymentsController < ApplicationController
      @customers = Customer.order('name ASC')
     if params[:customer_id]
       @customer = Customer.find(params[:customer_id])
-      @deployments = @customer.deployments.order
+      @deployments = @customer.deployments.order('deploy_date DESC')
     else
       @deployments = Deployment.order('deploy_date DESC')
     end
