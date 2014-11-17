@@ -1,4 +1,5 @@
 class DeploymentsController < ApplicationController
+  helper_method :sort_column, :sort_direction
   before_action :set_deployment, only: [:show, :edit, :update, :destroy]
 
   # GET /deployments
@@ -6,10 +7,12 @@ class DeploymentsController < ApplicationController
   def index
      @customers = Customer.order('name ASC')
     if params[:customer_id]
+      @search = Deployment.search(params[:q])
       @customer = Customer.find(params[:customer_id])
-      @deployments = @customer.deployments.order('deploy_date DESC')
+      @deployments = @customer.deployments.all
     else
-      @deployments = Deployment.order('deploy_date DESC')
+      @search = Deployment.search(params[:q])
+      @deployments = @search.result.includes(:customer).includes(:release)
     end
     respond_to do |format|
       format.html
@@ -75,6 +78,16 @@ class DeploymentsController < ApplicationController
   end
 
   private
+
+    def sort_column
+      params[:sort] || "deploy_date"
+    end
+  
+    def sort_direction
+      params[:direction] || "desc"
+    end
+
+
     # Use callbacks to share common setup or constraints between actions.
     def set_deployment
       @deployment = Deployment.find(params[:id])

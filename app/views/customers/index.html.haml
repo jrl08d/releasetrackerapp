@@ -3,7 +3,7 @@
 %table.table
   %thead
     %tr
-      %th Name
+      %th= sort_link @search, :name, "Name"
       %th Most Recent Deployment
       %th Version
       %th{:colspan => 2}
@@ -23,5 +23,4 @@
 = link_to "Add Release", new_release_path, :class => "btn btn-link"
 = link_to "Deployment History", deployments_path, :class => "btn btn-link"
 = link_to "Release History", releases_path, :class => "btn btn-link"
-= link_to 'Download CSV list', customers_path(format: :csv), :class => "btn btn-link"
 

@@ -16,6 +16,7 @@ gem 'simple_form', github: 'plataformatec/simple_form', branch: 'master'
 gem "resque"
 gem 'factory_girl'
 gem 'faker'
+gem 'ransack'
 gem 'haml-rails'
 
 

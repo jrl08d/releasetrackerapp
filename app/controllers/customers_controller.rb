@@ -4,14 +4,15 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
   def index
-    @customers = Customer.order('name ASC')
+    @search = Customer.search(params[:q])
+    @customers = @search.result
     @deployments = Deployment.order("created_at DESC").limit(1)
-    respond_to do |format|
+    Resque.enqueue(CSVExportJob)
+    
+
+   respond_to do |format|
       format.html
-      format.csv do
-        headers['Content-Disposition'] = "attachment; filename=\"customer-release-list\""
-        headers['Content-Type'] ||= 'text/csv'
-      end
+      format.csv { render text: @customers.to_csv }
     end
   end
 

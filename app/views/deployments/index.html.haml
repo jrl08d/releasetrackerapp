@@ -10,9 +10,9 @@
 %table.table
   %thead
 
-    %th Customer
-    %th Deployment Date
-    %th Version
+    %th= sort_link @search, :customer_name, "Customer"
+    %th= sort_link @search, :deploy_date, "Deployment"
+    %th= sort_link @search, :release_version, "Version"
     
     %th
   %tbody
