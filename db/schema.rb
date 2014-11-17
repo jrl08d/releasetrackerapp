@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141113214328) do
+ActiveRecord::Schema.define(version: 20141117163612) do
 
   create_table "customers", force: true do |t|
     t.string   "name"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20141113214328) do
     t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "release_date"
   end
 
   add_index "releases", ["version"], name: "index_releases_on_version"
