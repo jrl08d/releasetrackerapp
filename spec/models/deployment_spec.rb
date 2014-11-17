@@ -2,15 +2,17 @@ require 'rails_helper'
 
 RSpec.describe Deployment, :type => :model do
 
+
   context 'indexes' do
-    pending { should have_index(:release_id) }
-    it { should have_index(:customer_id) }
+    it { should have_db_index(:release_id) }
+    it { should have_db_index(:customer_id) }
   end
 
   context 'associations' do
     it { should belong_to(:release) }
     it { should belong_to(:customer) }
   end
+
 
   #TODO How do we test these in Rails 4?
   # context 'mass assignment' do
@@ -23,6 +25,4 @@ RSpec.describe Deployment, :type => :model do
     it { should validate_presence_of(:release_id) }
     it { should validate_uniqueness_of(:release_id) }
   end
-
-
 end

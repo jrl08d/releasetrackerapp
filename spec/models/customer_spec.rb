@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Customer, :type => :model do
 
   context 'indexes' do
-    it { should have_index(:name) }
+    it { should have_db_index(:name) }
   end
 
   context 'associations' do
