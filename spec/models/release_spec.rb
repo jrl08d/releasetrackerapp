@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Release, :type => :model do
 
   context 'indexes' do
-    pending { should have_index(:version) }
+    it { should have_db_index(:version) }
   end
 
   context 'associations' do

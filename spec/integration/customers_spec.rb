@@ -15,3 +15,11 @@ RSpec.describe "Customer lookup" do
   end
 
 end
+
+
+RSpec.describe "Deployment History lookup" do
+
+	it "should display the history of all deployments to date" do
+		visit '/deployments'
+	end
+end 
