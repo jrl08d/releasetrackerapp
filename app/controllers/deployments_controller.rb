@@ -6,8 +6,8 @@ class DeploymentsController < ApplicationController
   # GET /deployments.json
   def index
      @customers = Customer.order('name ASC')
-    if params[:customer_id]
-      @customer = Customer.find(params[:customer_id])
+    if params[:customer_id].present?
+      @customer = Customer.find(params[:customer_id]) 
       @search = @customer.deployments.search(params[:q])
       @deployments = @search.result.paginate(:page => params[:page], :per_page => 12)
     else
