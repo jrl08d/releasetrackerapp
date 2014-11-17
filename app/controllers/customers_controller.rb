@@ -5,7 +5,7 @@ class CustomersController < ApplicationController
   # GET /customers.json
   def index
     @search = Customer.search(params[:q])
-    @customers = @search.result
+    @customers = @search.result.paginate(:page => params[:page], :per_page => 12)
     @deployments = Deployment.order("created_at DESC").limit(1)
     #Resque.enqueue(CSVExportJob)
     

@@ -18,9 +18,11 @@
       
 
 %br
-
+%div= will_paginate @customers, renderer: BootstrapPagination::Rails 
+%br
 = link_to 'Add Customer', new_customer_path, :class => "btn btn-link"
 = link_to "Add Release", new_release_path, :class => "btn btn-link"
 = link_to "Deployment History", deployments_path, :class => "btn btn-link"
 = link_to "Release History", releases_path, :class => "btn btn-link"
+
 

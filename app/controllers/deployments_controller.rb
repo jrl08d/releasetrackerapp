@@ -8,11 +8,11 @@ class DeploymentsController < ApplicationController
      @customers = Customer.order('name ASC')
     if params[:customer_id]
       @search = Deployment.search(params[:q])
-      @customer = Customer.find(params[:customer_id])
+      @customer = Customer.find(params[:customer_id]).paginate(:page => params[:page], :per_page => 12)
       @deployments = @customer.deployments.all
     else
       @search = Deployment.search(params[:q])
-      @deployments = @search.result.includes(:customer).includes(:release)
+      @deployments = @search.result.includes(:customer).includes(:release).paginate(:page => params[:page], :per_page => 12)
     end
     respond_to do |format|
       format.html
