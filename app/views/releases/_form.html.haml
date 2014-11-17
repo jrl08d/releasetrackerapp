@@ -5,6 +5,8 @@
     
     = f.input :version
 
+    = f.text_field :release_date, as: :datepicker, type: "date", value: "#{Date.today}", :required => true, class: 'form-control'
+    %br
 
     = f.input :comments
   .actions

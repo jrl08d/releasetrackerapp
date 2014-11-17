@@ -22,10 +22,17 @@
 
 
 #deployment_deploy_date {
-  width: 18%
+  width: 18%;
 }
+
+
+#release_release_date {
+  width: 18%;
+}
+
 
 .form-horizontal .form-group {
   margin-left: 0px !important;
   margin-right: 10px !important;
+  width: 50%  !important;
 }

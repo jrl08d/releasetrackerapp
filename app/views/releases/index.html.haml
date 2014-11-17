@@ -4,6 +4,7 @@
   %thead
  
     %th Version
+    %th Release Date
     %th Comments
     %th
     %th
@@ -12,7 +13,8 @@
   - @releases.each do |release|
     %tr
       %td= release.version
-      %td= release.comments
+      %td= release.release_date
+      %td= truncate(release.comments[0,40])
       %td= link_to content_tag(:i,nil, :class=>"fa fa-edit"), edit_release_path(release), :class => "btn btn-link"
       %td= link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), release, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-link"
 
