@@ -14,7 +14,7 @@ FactoryGirl.define do
     before(:create) do |object|
       unique_deployment = false
       begin
-         object.customer = Customer.order("RANDOM()").first
+         object.customer = Customer.references(:deployments).includes(:deployments).where("deployments.id IS NULL").order("RANDOM()").first || Customer.order("RANDOM()").first
          object.release = Release.order("RANDOM()").first
          unique_deployment = ! Deployment.exists?(customer: object.customer, release: object.release)
       end until unique_deployment

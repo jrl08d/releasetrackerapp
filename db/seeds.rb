@@ -9,26 +9,24 @@
 require Rails.root.join('spec/factories.rb')
 
 if Rails.env != 'production'
-	Release.destroy_all
-	Deployment.destroy_all
-	Customer.destroy_all
+  Release.destroy_all
+  Deployment.destroy_all
+  Customer.destroy_all
 
-  # ...
+  customer_count = 20
+  release_count = 30
 
   # Populate Customers
-  20.times do
+  customer_count.times do
     FactoryGirl.create :customer
   end
 
-  # ...
-
-
-  # Populate Releases --> issues with running this when uniqueness validation is enforced 
-  20.times do |i|
+  # Populate Releases --> issues with running this when uniqueness validation is enforced
+  release_count.times do |i|
     FactoryGirl.create :release, version: "#{i + 1}.0.0"
   end
 
-  15.times do
+  (customer_count * 3).times do
     FactoryGirl.create :deployment
   end
 end
