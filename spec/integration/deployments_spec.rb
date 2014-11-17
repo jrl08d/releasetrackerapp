@@ -25,7 +25,7 @@ RSpec.describe "Deployments lookup" do
 
     customer = Customer.last
 
-    select customer.name, from: :customer_id
+    select customer.name, from: :customer_filter
     click_on 'Filter'
 
     page.should have_selector('table tr', :count => customer.deployments.count)
@@ -34,7 +34,7 @@ RSpec.describe "Deployments lookup" do
   it "should allow clearing of filter" do
     visit '/deployments'
 
-    find('select#customer_id').find("option[value='']").select_option
+    find('select#customer_filter').find("option[value='']").select_option
     click_on 'Filter'
 
     page.should have_selector('table tr', :count => @deployments_count)
