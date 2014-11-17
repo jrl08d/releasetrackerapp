@@ -1,0 +1,1 @@
+Resque.redis = Redis::Namespace.new(:resque, :redis => $redis)

@@ -7,12 +7,12 @@ class CustomersController < ApplicationController
     @search = Customer.search(params[:q])
     @customers = @search.result.paginate(:page => params[:page], :per_page => 12)
     @deployments = Deployment.order("created_at DESC").limit(1)
-    #Resque.enqueue(CSVExportJob)
+    Resque.enqueue(CSVExportJob)
     
 
    respond_to do |format|
       format.html
-      format.csv { render text: @customers.to_csv }
+      format.csv { render :csv => @customers }
     end
   end
 

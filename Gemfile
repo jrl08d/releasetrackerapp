@@ -17,6 +17,8 @@ gem "resque"
 gem 'factory_girl'
 gem 'faker'
 gem 'ransack'
+gem 'will_paginate', '~> 3.0.7'
+gem 'will_paginate-bootstrap'
 gem 'haml-rails'
 
 
