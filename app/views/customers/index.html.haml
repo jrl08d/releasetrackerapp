@@ -1,21 +1,28 @@
 %h1 DadeSystems Customers 
 
-%table.table
-  %thead
-    %tr
-      %th= sort_link @search, :name, "Name"
-      %th Most Recent Deployment
-      %th Version
-      %th{:colspan => 2}
-  %tbody
-    - @customers.each do |customer| 
+= form_tag customers_path do 
+  %table.table#customers_table
+    %thead
       %tr
-        %td= customer.name 
-        %td= customer.deployments.collect { |a| a.deploy_date }.max
-        %td= customer.releases.collect { |a| a.version }.max
-        %td= link_to content_tag(:i,nil, :class=>"fa fa-edit"), edit_customer_path(customer), :class => "btn btn-link", :title =>"Edit Customer & Deployment"
-        %td= link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), customer, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-link"
-      
+        %th
+          = sort_link @search, :name, "Name" 
+          %div= text_field_tag :name
+        %th 
+          Most Recent Deployment
+          %div= text_field_tag :deployment_deploy_date
+        %th 
+          Version
+          %div= text_field_tag :release_version
+        %th{:colspan => 2}
+    %tbody
+      - @customers.each do |customer| 
+        %tr
+          %td= customer.name 
+          %td= customer.deployments.collect { |a| a.deploy_date }.max
+          %td= customer.releases.collect { |a| a.version }.max
+          %td= link_to content_tag(:i,nil, :class=>"fa fa-edit"), edit_customer_path(customer), :class => "btn btn-link", :title =>"Edit Customer & Deployment"
+          %td= link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), customer, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-link"
+    
 
 %br
 %div= will_paginate @customers, renderer: BootstrapPagination::Rails 
