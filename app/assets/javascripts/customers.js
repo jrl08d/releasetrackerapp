@@ -1,5 +1,11 @@
-
-$(document).ready(function() {
+$(function() {
+  initPage();
+});
+$(window).bind('page:change', function() {
+  initPage();
+});
+function initPage() {
+  // Page ready code...
 	
 
     // Setup - add a text input to each footer cell
@@ -9,7 +15,7 @@ $(document).ready(function() {
     } );
  
     // DataTable
-    var table = $('#customers_table').DataTable()
+    var table = $('#customers_table').DataTable();
  
     // Apply the search
     table.columns().eq( 0 ).each( function ( colIdx ) {
@@ -20,6 +26,5 @@ $(document).ready(function() {
                 .draw();
         } );
     } );
-} );
-
+}
 
