@@ -9,7 +9,7 @@ $(document).ready(function() {
     } );
  
     // DataTable
-    var table = $('#customers_table').DataTable()
+    var table = $('#customers_table').DataTable();
  
     // Apply the search
     table.columns().eq( 0 ).each( function ( colIdx ) {
@@ -21,5 +21,4 @@ $(document).ready(function() {
         } );
     } );
 } );
-
 
