@@ -1,4 +1,4 @@
-!!!
+
 %html
   %head
     %title Releasetrackerapp
@@ -7,4 +7,9 @@
     = csrf_meta_tags
   %body
     .container
-      = yield
+      .nav
+        Language:
+        = link_to_unless_current "English", locale: "en" 
+        |
+        = link_to_unless_current "Wookieespeak", locale: "wk" 
+        = yield
