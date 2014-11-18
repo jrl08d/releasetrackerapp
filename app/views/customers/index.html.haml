@@ -4,29 +4,28 @@
   %table.table#customers_table
     %thead
       %tr
-        %th
-          = sort_link @search, :name, "Name" 
-          %div= text_field_tag :name
+        %th Name
         %th 
           Most Recent Deployment
-          %div= text_field_tag :deployment_deploy_date
         %th 
           Version
-          %div= text_field_tag :release_version
-        %th{:colspan => 2}
+
+        %tfoot
+          %tr
+            %th Name
+            %th 
+            %th Version
+
     %tbody
       - @customers.each do |customer| 
         %tr
-          %td= customer.name 
+          %td= link_to customer.name, edit_customer_path(customer)
           %td= customer.deployments.collect { |a| a.deploy_date }.max
           %td= customer.releases.collect { |a| a.version }.max
-          %td= link_to content_tag(:i,nil, :class=>"fa fa-edit"), edit_customer_path(customer), :class => "btn btn-link", :title =>"Edit Customer & Deployment"
-          %td= link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), customer, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-link"
     
 
 %br
-%div= will_paginate @customers, renderer: BootstrapPagination::Rails 
-%br
+
 
 = link_to 'Add Customer', new_customer_path, :class => "btn btn-link"
 = link_to "Add Release", new_release_path, :class => "btn btn-link"

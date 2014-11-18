@@ -4,5 +4,6 @@
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require jquery_ujs
 //= require jquery.livesearch
+//= require jquery.dataTables.min.js
 //= require turbolinks
 //= require_tree .
