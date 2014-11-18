@@ -5,26 +5,26 @@
   = select_tag :customer_filter, options_from_collection_for_select(@customers, "id", "name"), {:prompt => '--Select Company--'}
   =  submit_tag "Filter", :class => "btn btn-info btn-xs"
  
+-cache do
+  %table.table
+    %thead
 
-%table.table
-  %thead
-
-    %th= sort_link @search, :customer_name, "Customer"
-    %th= sort_link @search, :deploy_date, "Deployment"
-    %th= sort_link @search, :release_version, "Version"
-    
-    %th
-  %tbody
+      %th= sort_link @search, :customer_name, "Customer"
+      %th= sort_link @search, :deploy_date, "Deployment"
+      %th= sort_link @search, :release_version, "Version"
+      
+      %th
+    %tbody
 
 
 
-  - @deployments.each do |deployment|
-    %tr
-      %td= deployment.customer.name if deployment.customer
-      %td= deployment.deploy_date
-      %td= deployment.release.version
-     
-      %td= link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), deployment, :method => :delete, :data => { :confirm => 'Are you sure?' }
+    - @deployments.each do |deployment|
+      %tr
+        %td= deployment.customer.name if deployment.customer
+        %td= deployment.deploy_date
+        %td= deployment.release.version
+       
+        %td= link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), deployment, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 %div= will_paginate @deployments, renderer: BootstrapPagination::Rails 
