@@ -3,13 +3,19 @@ Rails.application.routes.draw do
 
   resources :deployments
 
-  root to: "customers#index"
+  
 
   resources :customers do 
     resources :deployments
   end
 
   resources :customers
+  scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
+    resources :customers
+    root to: 'customers#index'
+  end
+  get '*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
+  get '', to: redirect("/#{I18n.default_locale}")
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

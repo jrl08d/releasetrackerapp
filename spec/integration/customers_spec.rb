@@ -16,6 +16,7 @@ RSpec.describe "Customer lookup" do
     visit '/customers'
   end
 
+
   it "should update cache whenever customer records change" do
     visit '/customers'
     page.should have_selector('table tbody tr', count: @customers_count)
@@ -26,7 +27,15 @@ RSpec.describe "Customer lookup" do
     visit '/customers'
     page.should have_selector('table tbody tr', count: new_count)
   end
-
+  #testing i18n translations
+  describe "GET 'index'" do
+    before do
+      get 'index'
+    end
+    it "should be successful" do
+      response.should be_redirect
+    end
+  end
 
 
 end
