@@ -7,7 +7,9 @@ $(window).bind('page:change', function() {
 });
 function initPage() {
   // Page ready code...
+
     
+
 
     // Setup - add a text input to each footer cell
     $('#customers_table tfoot th').each( function () {

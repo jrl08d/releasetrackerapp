@@ -1,5 +1,7 @@
 %h1= t "customers.index.title"
 
+
+
 = form_tag customers_path do 
   %table.table#customers_table
     %thead
@@ -18,11 +20,13 @@
 
     %tbody
       - @customers.each do |customer| 
-        %tr
-          %td= link_to customer.name, edit_customer_path(customer)
-          %td= customer.deployments.collect { |a| a.deploy_date }.max
-          %td= customer.releases.collect { |a| a.version }.max
-    
+        - cache(customer) do
+          %tr
+            %td= link_to customer.name, edit_customer_path(customer)
+            %td= customer.deployments.collect { |a| a.deploy_date }.max
+            %td= customer.releases.collect { |a| a.version }.max
+
+
 
 %br
 

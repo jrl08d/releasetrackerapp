@@ -19,12 +19,13 @@
 
 
   - @deployments.each do |deployment|
-    %tr
-      %td= deployment.customer.name if deployment.customer
-      %td= deployment.deploy_date
-      %td= deployment.release.version
-     
-      %td= link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), deployment, :method => :delete, :data => { :confirm => 'Are you sure?' }
+    -cache(deployment) do
+      %tr
+        %td= deployment.customer.name if deployment.customer
+        %td= deployment.deploy_date
+        %td= deployment.release.version
+       
+        %td= link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), deployment, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 %div= will_paginate @deployments, renderer: BootstrapPagination::Rails 
