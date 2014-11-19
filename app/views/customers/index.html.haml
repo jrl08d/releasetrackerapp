@@ -18,9 +18,33 @@
           %td= link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), customer, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-link"
       
 
+= form_tag customers_path do 
+  %table.table#customers_table
+    %thead
+      %tr
+        %th Name
+        %th 
+          Most Recent Deployment
+        %th 
+          Version
+
+        %tfoot
+          %tr
+            %th Name
+            %th 
+            %th Version
+
+    %tbody
+      - @customers.each do |customer| 
+        %tr
+          %td= link_to customer.name, edit_customer_path(customer)
+          %td= customer.deployments.collect { |a| a.deploy_date }.max
+          %td= customer.releases.collect { |a| a.version }.max
+    
+
+
 %br
-%div= will_paginate @customers, renderer: BootstrapPagination::Rails 
-%br
+
 
 = link_to 'Add Customer', new_customer_path, :class => "btn btn-link"
 = link_to "Add Release", new_release_path, :class => "btn btn-link"
