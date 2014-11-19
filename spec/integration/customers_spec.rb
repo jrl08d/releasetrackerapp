@@ -14,6 +14,17 @@ RSpec.describe "Customer lookup" do
     visit '/customers'
   end
 
+
+  #testing i18n translations
+  describe "GET 'index'" do
+    before do
+      get 'index'
+    end
+    it "should be successful" do
+      response.should be_redirect
+    end
+  end
+
 end
 
 

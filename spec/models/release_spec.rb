@@ -7,7 +7,7 @@ RSpec.describe Release, :type => :model do
   end
 
   context 'associations' do
-   it { should have_many(:deployments) }
+    it { should have_many(:deployments) }
     it { should have_many(:customers).through(:deployments)}
   end
 
