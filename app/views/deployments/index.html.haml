@@ -5,20 +5,21 @@
   = select_tag :customer_filter, options_from_collection_for_select(@customers, "id", "name"), {:prompt => '--Select Company--'}
   =  submit_tag "Filter", :class => "btn btn-info btn-xs"
  
--cache do
-  %table.table
-    %thead
 
-      %th= sort_link @search, :customer_name, "Customer"
-      %th= sort_link @search, :deploy_date, "Deployment"
-      %th= sort_link @search, :release_version, "Version"
-      
-      %th
-    %tbody
+%table.table
+  %thead
+
+    %th= sort_link @search, :customer_name, "Customer"
+    %th= sort_link @search, :deploy_date, "Deployment"
+    %th= sort_link @search, :release_version, "Version"
+    
+    %th
+  %tbody
 
 
 
-    - @deployments.each do |deployment|
+  - @deployments.each do |deployment|
+    -cache(deployment) do
       %tr
         %td= deployment.customer.name if deployment.customer
         %td= deployment.deploy_date

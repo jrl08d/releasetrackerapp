@@ -1,7 +1,11 @@
-
-$(document).ready(function() {
-	
-
+$(function() {
+  initPage();
+});
+$(window).bind('page:change', function() {
+  initPage();
+});
+function initPage() {
+  // Page ready code...
     // Setup - add a text input to each footer cell
     $('#customers_table tfoot th').each( function () {
         var title = $('#example thead th').eq( $(this).index() ).text();
@@ -20,5 +24,7 @@ $(document).ready(function() {
                 .draw();
         } );
     } );
-} );
+}
+
+
 
