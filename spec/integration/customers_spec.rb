@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe "Customer lookup" do
 
   before(:each) do
-    10.times do
+    @customers_count = 10
+
+    @customers_count.times do
       FactoryGirl.create :customer
     end
 
@@ -14,12 +16,18 @@ RSpec.describe "Customer lookup" do
     visit '/customers'
   end
 
+  it "should update cache whenever customer records change" do
+    visit '/customers'
+    page.should have_selector('table tbody tr', count: @customers_count)
+    FactoryGirl.create :customer
+
+    Customer.count.should == (new_count = @customers_count + 1) 
+
+    visit '/customers'
+    page.should have_selector('table tbody tr', count: new_count)
+  end
+
+
+
 end
 
-
-RSpec.describe "Deployment History lookup" do
-
-	it "should display the history of all deployments to date" do
-		visit '/deployments'
-	end
-end 
