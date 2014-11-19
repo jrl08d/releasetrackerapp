@@ -21,7 +21,7 @@ gem 'will_paginate', '~> 3.0.5'
 gem 'jquery-datatables-rails', '~> 3.0.0'
 gem 'will_paginate-bootstrap'
 gem 'haml-rails'
-gem 'authlogic', '~> 3.4.3'
+gem 'authlogic'
 
 
 group :development do
