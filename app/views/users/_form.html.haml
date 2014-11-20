@@ -6,7 +6,7 @@
     = f.input :email
     = f.input :password
     = f.input :password_confirmation
-    = f.input :admin, as: :select, :label => "Sign Up as Admin?"
+    = f.input :admin, as: :select, :label => "Sign Up as Admin?", :required => :true
 
   .form-actions
     = f.button :submit

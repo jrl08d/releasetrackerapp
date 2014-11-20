@@ -25,8 +25,7 @@ class CustomersController < ApplicationController
         end
       end
     else
-      @search = current_user.customers.search(params[:q])
-      @customers = @search.result
+      @customer = current_user.customer
       @deployments = Deployment.order("created_at DESC").limit(1)
       Resque.enqueue(CSVExportJob)
       respond_to do |format|

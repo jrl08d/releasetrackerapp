@@ -20,8 +20,8 @@ class DeploymentsController < ApplicationController
         format.csv { render text: @deployments.to_csv }
       end
     else
-      @customers = current_user.customers
-      @search = Deployment.where(customer_id: @customers.first).search(params[:q])
+      @customer = current_user.customer
+      @search = Deployment.where(customer_id: @customer).search(params[:q])
       @deployments = @search.result.includes(:customer).includes(:release).paginate(:page => params[:page], :per_page => 12)
       render :index2
     end
