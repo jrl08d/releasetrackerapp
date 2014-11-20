@@ -5,18 +5,25 @@ class DeploymentsController < ApplicationController
   # GET /deployments
   # GET /deployments.json
   def index
-     @customers = Customer.order('name ASC')
-    if params[:customer_filter].present?
-      @customer = Customer.find(params[:customer_filter]) 
-      @search = @customer.deployments.search(params[:q])
-      @deployments = @search.result.paginate(:page => params[:page], :per_page => 12)
+    if current_user.admin?
+       @customers = Customer.order('name ASC')
+      if params[:customer_filter].present?
+        @customer = Customer.find(params[:customer_filter]) 
+        @search = @customer.deployments.search(params[:q])
+        @deployments = @search.result.paginate(:page => params[:page], :per_page => 12)
+      else
+        @search = Deployment.search(params[:q])
+        @deployments = @search.result.includes(:customer).includes(:release).paginate(:page => params[:page], :per_page => 12)
+      end
+      respond_to do |format|
+        format.html { render :index }
+        format.csv { render text: @deployments.to_csv }
+      end
     else
-      @search = Deployment.search(params[:q])
+      @customers = current_user.customers
+      @search = Deployment.where(customer_id: @customers.first).search(params[:q])
       @deployments = @search.result.includes(:customer).includes(:release).paginate(:page => params[:page], :per_page => 12)
-    end
-    respond_to do |format|
-      format.html
-      format.csv { render text: @deployments.to_csv }
+      render :index2
     end
   end
 

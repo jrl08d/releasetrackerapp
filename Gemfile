@@ -15,6 +15,7 @@ gem 'font-awesome-sass', '~> 4.2.0'
 gem 'simple_form', github: 'plataformatec/simple_form', branch: 'master'
 gem "resque"
 gem 'factory_girl'
+gem "cancan"
 gem 'faker'
 gem 'ransack'
 gem 'will_paginate', '~> 3.0.5'

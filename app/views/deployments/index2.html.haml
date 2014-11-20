@@ -1,0 +1,29 @@
+%h1 Deployment History
+
+
+%table.table
+  %thead
+
+    %th= sort_link @search, :customer_name, "Customer"
+    %th= sort_link @search, :deploy_date, "Deployment"
+    %th= sort_link @search, :release_version, "Version"
+    
+
+  %tbody
+
+
+
+  - @deployments.each do |deployment|
+    -cache(deployment) do
+      %tr
+        %td= deployment.customer.name if deployment.customer
+        %td= deployment.deploy_date
+        %td= deployment.release.version
+       
+
+%br
+%div= will_paginate @deployments, renderer: BootstrapPagination::Rails 
+%br
+
+
+= link_to "Release History", releases_path, :class => "btn btn-link"

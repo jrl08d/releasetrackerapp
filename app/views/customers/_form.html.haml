@@ -1,6 +1,7 @@
 = simple_form_for(@customer, :html => { class: "form-group" }) do |f|
   = f.error_notification
   = f.input :name, placeholder: 'Name of Client', :required => true
+  = f.association :user, :label_method => :username
   = f.button :submit, :class => 'btn btn-info'
 
 

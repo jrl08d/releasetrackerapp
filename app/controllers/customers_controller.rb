@@ -7,19 +7,30 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
   def index
-    if  request.format == "csv"
-      @customers = Customer.order("name ASC")
-      respond_to do |format|
-        format.html
-        format.csv { render :csv => @customers}
+    if current_user.admin?
+      if  request.format == "csv"
+        @customers = Customer.order("name ASC")
+        respond_to do |format|
+          format.html
+          format.csv { render :csv => @customers}
+        end
+      else
+        @search = Customer.search(params[:q])
+        @customers = @search.result
+        @deployments = Deployment.order("created_at DESC").limit(1)
+        Resque.enqueue(CSVExportJob)
+        respond_to do |format|
+          format.html
+          format.csv { render :csv => @customers}
+        end
       end
     else
-      @search = Customer.search(params[:q])
+      @search = current_user.customers.search(params[:q])
       @customers = @search.result
       @deployments = Deployment.order("created_at DESC").limit(1)
       Resque.enqueue(CSVExportJob)
       respond_to do |format|
-        format.html
+        format.html {redirect_to deployments_path}
         format.csv { render :csv => @customers}
       end
     end
@@ -91,6 +102,6 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:name)
+      params.require(:customer).permit(:name, :user_id)
     end
 end

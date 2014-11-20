@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119195107) do
+ActiveRecord::Schema.define(version: 20141120163839) do
 
   create_table "customers", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "customers", ["name"], name: "index_customers_on_name"
@@ -50,6 +51,7 @@ ActiveRecord::Schema.define(version: 20141119195107) do
     t.string   "persistence_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "admin"
   end
 
 end
