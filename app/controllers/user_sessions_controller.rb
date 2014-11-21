@@ -1,4 +1,6 @@
 class UserSessionsController < ApplicationController
+  before_filter :require_no_user, only: %w(new create)
+  before_filter :require_user, only: :destroy
 
   # GET /user_sessions/new
   def new

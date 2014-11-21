@@ -12,10 +12,21 @@ RSpec.describe "Deployments lookup" do
     end
 
     Deployment.count.should == @deployments_count
+
+    # TODO: Add factory for User and use it here to refactor this code :)
+    @user = User.create!({
+      username: 'testuser',
+      email: 'test@example.com',
+      admin: true,
+      password: password = '123456',
+      password_confirmation: password
+    })
+
+    sign_in(@user)
   end
 
 
-  pending "should should list of deployments"
+  pending "should show list of deployments"
 
 
   it "should allow filtering of customers" do
