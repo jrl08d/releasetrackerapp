@@ -6,6 +6,7 @@
 
     %th= sort_link @search, :customer_name, "Customer"
     %th= sort_link @search, :deploy_date, "Deployment"
+    %th
     %th= sort_link @search, :release_version, "Version"
     
 
@@ -18,6 +19,7 @@
       %tr
         %td= deployment.customer.name if deployment.customer
         %td= deployment.deploy_date
+        %td= link_to content_tag(:i,nil, :class=>"fa fa-info-circle"), deployment
         %td= deployment.release.version
        
 

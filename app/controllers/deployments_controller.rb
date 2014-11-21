@@ -31,6 +31,7 @@ class DeploymentsController < ApplicationController
   # GET /deployments/1
   # GET /deployments/1.json
   def show
+    authorize! :read, @deployment
   end
 
   # GET /deployments/new

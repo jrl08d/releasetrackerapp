@@ -21,7 +21,7 @@
   - @deployments.each do |deployment|
     -cache(deployment) do
       %tr
-        %td= deployment.customer.name if deployment.customer
+        %td= link_to deployment.customer.name if deployment.customer
         %td= deployment.deploy_date
         %td= deployment.release.version
        

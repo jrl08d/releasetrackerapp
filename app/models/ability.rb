@@ -8,11 +8,11 @@ class Ability
        if user.admin?
          can :manage, :all
 
-       elsif user.customer
-
-        # only read deployments that belong to customer
-
-         can :read, Deployment, Release
+       elsif user.admin? == false
+        can :read, Release
+        can :read, Deployment do |deployment|
+          deployment.customer
+        end
        end
     #
     # The first argument to `can` is the action you are giving the user

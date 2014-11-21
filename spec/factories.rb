@@ -8,6 +8,14 @@ FactoryGirl.define do
     password_confirmation "123456"
   end
 
+  factory :basic, class: User do
+    username "basicuser"
+    email "basic@example.com"
+    admin false
+    password "12345678"
+    password_confirmation "12345678"
+  end
+
 
   factory :customer do
     name { Faker::Company.name }
