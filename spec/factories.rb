@@ -1,4 +1,15 @@
 FactoryGirl.define do
+
+  factory :user do
+    username "test"
+    admin false
+  end
+
+  # This will use the User class (Admin would have been guessed)
+  factory :admin, class: User do
+    username "testadmin"
+    admin      true
+  end
  
   factory :customer do
     name { Faker::Company.name }
@@ -35,6 +46,7 @@ FactoryGirl.define do
     end
  
     comments {Faker::Lorem.paragraph}
+    release_date {Faker::Date.between(2.years.ago, Date.today)}
   end
  
 end
