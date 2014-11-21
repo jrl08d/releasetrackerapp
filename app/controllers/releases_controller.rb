@@ -21,10 +21,12 @@ class ReleasesController < ApplicationController
   # GET /releases/new
   def new
     @release = Release.new
+    authorize! :create, @release
   end
 
   # GET /releases/1/edit
   def edit
+    authorize! :update, @release
   end
 
   # POST /releases
@@ -65,6 +67,7 @@ class ReleasesController < ApplicationController
       format.html { redirect_to releases_url, notice: 'Release was successfully destroyed.' }
       format.json { head :no_content }
     end
+    authorize! :destroy, @release
   end
 
   private

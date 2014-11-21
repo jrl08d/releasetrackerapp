@@ -1,6 +1,7 @@
 class DeploymentsController < ApplicationController
   helper_method :sort_column, :sort_direction
   before_action :set_deployment, only: [:show, :edit, :update, :destroy]
+  
 
   # GET /deployments
   # GET /deployments.json
@@ -35,11 +36,12 @@ class DeploymentsController < ApplicationController
   # GET /deployments/new
   def new
     @deployment = Deployment.new
+    authorize! :create, @deployment
   end
 
   # GET /deployments/1/edit
   def edit
-    
+    authorize! :update, @deployment
   end
 
   # POST /deployments
@@ -82,6 +84,7 @@ class DeploymentsController < ApplicationController
       format.html { redirect_to deployments_url, notice: 'Deployment was successfully destroyed.' }
       format.json { head :no_content }
     end
+    authorize! :destroy, @deployment
   end
 
   private

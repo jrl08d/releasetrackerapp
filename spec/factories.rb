@@ -1,15 +1,13 @@
 FactoryGirl.define do
 
   factory :user do
-    username "test"
-    admin false
+    username "testuser"
+    email "test@example.com"
+    admin true
+    password "123456"
+    password_confirmation "123456"
   end
 
-  # This will use the User class (Admin would have been guessed)
-  factory :admin, class: User do
-    username "testadmin"
-    admin      true
-  end
  
   factory :customer do
     name { Faker::Company.name }

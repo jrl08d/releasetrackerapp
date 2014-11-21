@@ -41,18 +41,22 @@ class CustomersController < ApplicationController
   # GET /customers/new
   def new
     @customer = Customer.new
+    authorize! :create, @customer
+
   end
 
   # GET /customers/1/edit
   def edit
 
     @deployment = @customer.deployments.build
+    authorize! :update, @customer
 
   end
 
   # POST /customers
   # POST /customers.json
   def create
+
     @customer = Customer.new(customer_params)
 
     respond_to do |format|
@@ -88,6 +92,7 @@ class CustomersController < ApplicationController
       format.html { redirect_to customers_url, notice: 'Customer was successfully destroyed.' }
       format.json { head :no_content }
     end
+    authorize! :destroy, @customer
   end
 
   private
