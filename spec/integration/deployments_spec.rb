@@ -26,7 +26,7 @@ RSpec.describe "Deployments lookup" do
   end
 
 
-  pending "should should list of deployments"
+  pending "should show list of deployments"
 
 
   it "should allow filtering of customers" do
