@@ -14,7 +14,7 @@ gem 'bootstrap-sass', '~> 3.3.1'
 gem 'font-awesome-sass', '~> 4.2.0'
 gem 'simple_form', github: 'plataformatec/simple_form', branch: 'master'
 gem "resque"
-gem 'factory_girl'
+gem 'factory_girl_rails'
 gem "cancan"
 gem 'faker'
 gem 'ransack'

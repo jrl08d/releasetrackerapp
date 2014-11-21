@@ -6,6 +6,7 @@ FactoryGirl.define do
     admin true
     password "123456"
     password_confirmation "123456"
+    initialize_with { new(username) }
   end
 
  
