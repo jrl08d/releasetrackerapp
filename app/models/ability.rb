@@ -11,7 +11,7 @@ class Ability
        elsif user.admin? == false
         can :read, Release
         can :read, Deployment do |deployment|
-          deployment.customer
+          deployment.customer.user == user
         end
        end
     #

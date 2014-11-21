@@ -8,7 +8,7 @@ FactoryGirl.define do
     password_confirmation "123456"
   end
 
-  factory :basic, class: User do
+  factory :basic_user, class: User do
     username "basicuser"
     email "basic@example.com"
     admin false
@@ -18,23 +18,28 @@ FactoryGirl.define do
 
 
   factory :customer do
-    name { Faker::Company.name }
-    factory :customer_with_deployment do
-      after(:create) do |customer|
-        create(:deployment, customer: customer)
+    before(:create) do |object|
+      object.user = FactoryGirl.create(:basic_user)
+      factory :customer_with_deployment do
+        after(:create) do |customer|
+          create(:deployment, customer: customer)
+        end
       end
     end
+    name { Faker::Company.name } 
   end
 
   factory :deployment do
 
     before(:create) do |object|
-      unique_deployment = false
-      begin
-         object.customer = Customer.references(:deployments).includes(:deployments).where("deployments.id IS NULL").order("RANDOM()").first || Customer.order("RANDOM()").first
-         object.release = Release.order("RANDOM()").first
-         unique_deployment = ! Deployment.exists?(customer: object.customer, release: object.release)
-      end until unique_deployment
+      unless object.customer && object.release 
+        unique_deployment = false
+        begin
+           object.customer = Customer.references(:deployments).includes(:deployments).where("deployments.id IS NULL").order("RANDOM()").first || Customer.order("RANDOM()").first
+           object.release = Release.order("RANDOM()").first
+           unique_deployment = ! Deployment.exists?(customer: object.customer, release: object.release)
+        end until unique_deployment
+      end
     end
 
     deploy_date { Faker::Date.between(2.years.ago, Date.today)}

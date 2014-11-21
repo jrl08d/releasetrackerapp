@@ -11,13 +11,22 @@ describe "Ability" do
   end
   context "as customer" do
   	it "can view its Deployments & History of Releases" do
-  		basic=FactoryGirl.create(:basic)
+  		basic=FactoryGirl.create(:basic_user)
   		ability = Ability.new(basic)
     	ability.cannot?(:manage, Deployment).should == true
     	ability.cannot?(:manage, Customer).should == true
     	ability.cannot?(:manage, Release).should == true
     	ability.can?(:read, Release).should == true
-    	#not sure how to do .... can?(:read [their deployment]).should == true
+
+      @deployment = FactoryGirl.create(:deployment, {
+       customer: FactoryGirl.create(:customer),
+       release: FactoryGirl.create(:release)
+      })
+
+      @deployment.customer.user.should_not == nil
+      @deployment.customer.user.should_not == basic
+
+    	ability.can?(:read, @deployment).should == true
 	end	
   end
 end
