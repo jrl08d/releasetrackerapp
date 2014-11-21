@@ -1,30 +1,32 @@
+
 %h1= t "customers.index.title"
+%br
 
 
+.custo_table
+  = form_tag customers_path do 
+    %table.table.table-bordered.table-hover#customers_table
+      %thead
+        %tr
+          %th Name
+          %th 
+            Most Recent Deployment
+          %th 
+            Version
 
-= form_tag customers_path do 
-  %table.table#customers_table
-    %thead
-      %tr
-        %th Name
-        %th 
-          Most Recent Deployment
-        %th 
-          Version
+          %tfoot
+            %tr
+              %th Name
+              %th 
+              %th Version
 
-        %tfoot
-          %tr
-            %th Name
-            %th 
-            %th Version
-
-    %tbody
-      - @customers.each do |customer| 
-        - cache(customer) do
-          %tr
-            %td= link_to customer.name, edit_customer_path(customer)
-            %td= customer.deployments.collect { |a| a.deploy_date }.max
-            %td= customer.releases.collect { |a| a.version }.max
+      %tbody
+        - @customers.each do |customer| 
+          - cache(customer) do
+            %tr
+              %td= link_to customer.name, edit_customer_path(customer)
+              %td= customer.deployments.collect { |a| a.deploy_date }.max
+              %td= customer.releases.collect { |a| a.version }.max
 
 
 
