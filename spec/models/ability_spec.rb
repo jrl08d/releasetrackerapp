@@ -5,7 +5,7 @@ describe "Ability" do
     it "can access all" do
       user=FactoryGirl.create(:user)
       ability = Ability.new(user)
-      ability.should be_able_to(:access, :all)
+      ability.can?(:manage, :all).should == true
     end
   end
 end

@@ -6,10 +6,9 @@ FactoryGirl.define do
     admin true
     password "123456"
     password_confirmation "123456"
-    initialize_with { new(username) }
   end
 
- 
+
   factory :customer do
     name { Faker::Company.name }
     factory :customer_with_deployment do
@@ -18,9 +17,9 @@ FactoryGirl.define do
       end
     end
   end
- 
+
   factory :deployment do
- 
+
     before(:create) do |object|
       unique_deployment = false
       begin
@@ -29,10 +28,10 @@ FactoryGirl.define do
          unique_deployment = ! Deployment.exists?(customer: object.customer, release: object.release)
       end until unique_deployment
     end
- 
+
     deploy_date { Faker::Date.between(2.years.ago, Date.today)}
   end
- 
+
   factory :release do
     before(:create) do |object|
       unless object.version
@@ -43,9 +42,9 @@ FactoryGirl.define do
         end until unique_version
       end
     end
- 
+
     comments {Faker::Lorem.paragraph}
     release_date {Faker::Date.between(2.years.ago, Date.today)}
   end
- 
+
 end
