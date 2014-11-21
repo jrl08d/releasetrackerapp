@@ -1,8 +1,5 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
-  before_filter  :require_user
-
-
 
   # GET /customers
   # GET /customers.json
