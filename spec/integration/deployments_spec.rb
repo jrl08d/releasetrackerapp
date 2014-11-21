@@ -12,10 +12,18 @@ RSpec.describe "Deployments lookup" do
     end
 
     Deployment.count.should == @deployments_count
+
+    # TODO: Add factory for User and use it here to refactor this code :)
+    #DONE
+    @user=FactoryGirl.create(:user)
+    sign_in @user
   end
 
 
-  pending "should should list of deployments"
+  it "should show list of deployments" do
+    visit "/deployments"
+    page.should have_text("Customer")
+  end
 
 
   it "should allow filtering of customers" do

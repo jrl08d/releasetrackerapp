@@ -4,11 +4,13 @@ RSpec.describe Customer, :type => :model do
 
   context 'indexes' do
     it { should have_db_index(:name) }
+    it { should have_db_index(:user_id) }
   end
 
   context 'associations' do
     it { should have_many(:deployments) }
     it { should have_many(:releases).through(:deployments)}
+    it { should belong_to(:user)}
   end
 
   #TODO How do we test these in Rails 4?

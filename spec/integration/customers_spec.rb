@@ -9,11 +9,14 @@ RSpec.describe "Customer lookup" do
       FactoryGirl.create :customer
     end
 
-    Customer.count.should == 10
+    Customer.count.should == @customers_count
+    @user=FactoryGirl.create(:user)
+    sign_in @user
   end
 
   it "should display a list of customers" do
     visit '/customers'
+    page.should have_text("Name")
   end
 
 

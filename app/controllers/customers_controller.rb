@@ -1,23 +1,32 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
 
-
   # GET /customers
   # GET /customers.json
   def index
-    if  request.format == "csv"
-      @customers = Customer.order("name ASC")
-      respond_to do |format|
-        format.html
-        format.csv { render :csv => @customers}
+    if current_user.admin?
+      if  request.format == "csv"
+        @customers = Customer.order("name ASC")
+        respond_to do |format|
+          format.html
+          format.csv { render :csv => @customers}
+        end
+      else
+        @search = Customer.search(params[:q])
+        @customers = @search.result
+        @deployments = Deployment.order("created_at DESC").limit(1)
+        Resque.enqueue(CSVExportJob)
+        respond_to do |format|
+          format.html
+          format.csv { render :csv => @customers}
+        end
       end
     else
-      @search = Customer.search(params[:q])
-      @customers = @search.result
+      @customer = current_user.customer
       @deployments = Deployment.order("created_at DESC").limit(1)
       Resque.enqueue(CSVExportJob)
       respond_to do |format|
-        format.html
+        format.html {redirect_to deployments_path}
         format.csv { render :csv => @customers}
       end
     end
@@ -32,18 +41,22 @@ class CustomersController < ApplicationController
   # GET /customers/new
   def new
     @customer = Customer.new
+    authorize! :create, @customer
+
   end
 
   # GET /customers/1/edit
   def edit
 
     @deployment = @customer.deployments.build
+    authorize! :update, @customer
 
   end
 
   # POST /customers
   # POST /customers.json
   def create
+
     @customer = Customer.new(customer_params)
 
     respond_to do |format|
@@ -79,6 +92,7 @@ class CustomersController < ApplicationController
       format.html { redirect_to customers_url, notice: 'Customer was successfully destroyed.' }
       format.json { head :no_content }
     end
+    authorize! :destroy, @customer
   end
 
   private
@@ -89,6 +103,6 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:name)
+      params.require(:customer).permit(:name, :user_id)
     end
 end

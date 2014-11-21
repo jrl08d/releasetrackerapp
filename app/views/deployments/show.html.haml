@@ -6,7 +6,16 @@
 %p
   %b Customer:
   = @deployment.customer.name
+%p
+  %b Release Version:
+  = @deployment.release.version
+%p
+  %b Release Notes:
+  = @deployment.release.comments
 
-= link_to 'Edit', edit_deployment_path(@deployment)
-\|
-= link_to 'Back', deployments_path
+= if can? :update, @deployment
+  = link_to 'Edit', edit_deployment_path(@deployment)
+%span.btn.btn-default.btn-xs
+  = link_to deployments_path do 
+    %i.fa.fa-long-arrow-left
+    Back

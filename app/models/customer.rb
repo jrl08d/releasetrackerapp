@@ -1,4 +1,5 @@
 class Customer < ActiveRecord::Base
+	belongs_to :user
 	has_many :deployments
 	has_many :releases, through: :deployments
 	accepts_nested_attributes_for :deployments

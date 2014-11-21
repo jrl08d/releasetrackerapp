@@ -1,0 +1,12 @@
+= simple_form_for(@user) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :username
+    = f.input :email
+    = f.input :password
+    = f.input :password_confirmation
+    = f.input :admin, as: :select, :label => "Sign Up as Admin?", :required => :true
+
+  .form-actions
+    = f.button :submit

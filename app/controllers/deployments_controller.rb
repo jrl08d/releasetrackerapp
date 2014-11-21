@@ -1,38 +1,48 @@
 class DeploymentsController < ApplicationController
   helper_method :sort_column, :sort_direction
   before_action :set_deployment, only: [:show, :edit, :update, :destroy]
+  
 
   # GET /deployments
   # GET /deployments.json
   def index
-     @customers = Customer.order('name ASC')
-    if params[:customer_filter].present?
-      @customer = Customer.find(params[:customer_filter]) 
-      @search = @customer.deployments.search(params[:q])
-      @deployments = @search.result.paginate(:page => params[:page], :per_page => 12)
+    if current_user.admin?
+       @customers = Customer.order('name ASC')
+      if params[:customer_filter].present?
+        @customer = Customer.find(params[:customer_filter]) 
+        @search = @customer.deployments.search(params[:q])
+        @deployments = @search.result.paginate(:page => params[:page], :per_page => 12)
+      else
+        @search = Deployment.search(params[:q])
+        @deployments = @search.result.includes(:customer).includes(:release).paginate(:page => params[:page], :per_page => 12)
+      end
+      respond_to do |format|
+        format.html { render :index }
+        format.csv { render text: @deployments.to_csv }
+      end
     else
-      @search = Deployment.search(params[:q])
+      @customer = current_user.customer
+      @search = Deployment.where(customer_id: @customer).search(params[:q])
       @deployments = @search.result.includes(:customer).includes(:release).paginate(:page => params[:page], :per_page => 12)
-    end
-    respond_to do |format|
-      format.html
-      format.csv { render text: @deployments.to_csv }
+      render :index2
     end
   end
 
   # GET /deployments/1
   # GET /deployments/1.json
   def show
+    authorize! :read, @deployment
   end
 
   # GET /deployments/new
   def new
     @deployment = Deployment.new
+    authorize! :create, @deployment
   end
 
   # GET /deployments/1/edit
   def edit
-    
+    authorize! :update, @deployment
   end
 
   # POST /deployments
@@ -75,6 +85,7 @@ class DeploymentsController < ApplicationController
       format.html { redirect_to deployments_url, notice: 'Deployment was successfully destroyed.' }
       format.json { head :no_content }
     end
+    authorize! :destroy, @deployment
   end
 
   private

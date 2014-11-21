@@ -14,13 +14,15 @@ gem 'bootstrap-sass', '~> 3.3.1'
 gem 'font-awesome-sass', '~> 4.2.0'
 gem 'simple_form', github: 'plataformatec/simple_form', branch: 'master'
 gem "resque"
-gem 'factory_girl'
+gem 'factory_girl_rails'
+gem "cancan"
 gem 'faker'
 gem 'ransack'
 gem 'will_paginate', '~> 3.0.5'
 gem 'jquery-datatables-rails', '~> 3.0.0'
 gem 'will_paginate-bootstrap'
 gem 'haml-rails'
+gem 'authlogic'
 
 
 group :development do

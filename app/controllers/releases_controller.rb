@@ -4,7 +4,13 @@ class ReleasesController < ApplicationController
   # GET /releases
   # GET /releases.json
   def index
-    @releases = Release.order("version ASC").paginate(:page => params[:page], :per_page => 12)
+    if current_user.admin?
+      @releases = Release.order("version ASC").paginate(:page => params[:page], :per_page => 12)
+      render :index
+    else
+      @releases = Release.order("version ASC").paginate(:page => params[:page], :per_page => 12)
+      render :index2
+    end
   end
 
   # GET /releases/1
@@ -15,10 +21,12 @@ class ReleasesController < ApplicationController
   # GET /releases/new
   def new
     @release = Release.new
+    authorize! :create, @release
   end
 
   # GET /releases/1/edit
   def edit
+    authorize! :update, @release
   end
 
   # POST /releases
@@ -59,6 +67,7 @@ class ReleasesController < ApplicationController
       format.html { redirect_to releases_url, notice: 'Release was successfully destroyed.' }
       format.json { head :no_content }
     end
+    authorize! :destroy, @release
   end
 
   private
