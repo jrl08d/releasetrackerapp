@@ -1,16 +1,9 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+unless Rails.env.production?
 
-
-if Rails.env != 'production'
   Release.destroy_all
   Deployment.destroy_all
   Customer.destroy_all
+  User.destroy_all
 
   customer_count = 20
   release_count = 30
@@ -20,12 +13,17 @@ if Rails.env != 'production'
     FactoryGirl.create :customer
   end
 
-  # Populate Releases --> issues with running this when uniqueness validation is enforced
+  # Populate Releases
   release_count.times do |i|
     FactoryGirl.create :release, version: "#{i + 1}.0.0"
   end
 
+  # Populate Deployments
   (customer_count * 3).times do
-    FactoryGirl.create :deployment
+    FactoryGirl.create :deployment_for_existing_data
   end
+
+  # Seed Admin
+  FactoryGirl.create :admin, username: 'admin', password: 'admin'
+
 end
