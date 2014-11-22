@@ -1,32 +1,48 @@
 require 'rails_helper'
-require "cancan/matchers"
 
 describe "Ability" do
+
   context "as admin" do
-    it "can access all" do
-      user=FactoryGirl.create(:user)
-      ability = Ability.new(user)
-      ability.can?(:manage, :all).should == true
+    it "can manage all" do
+      admin = create(:admin)
+      ability = Ability.new(admin)
+      ability.can?(:manage, :all).should be true
     end
   end
+
   context "as customer" do
-  	it "can view its Deployments & History of Releases" do
-  		basic=FactoryGirl.create(:basic_user)
-  		ability = Ability.new(basic)
-    	ability.cannot?(:manage, Deployment).should == true
-    	ability.cannot?(:manage, Customer).should == true
-    	ability.cannot?(:manage, Release).should == true
-    	ability.can?(:read, Release).should == true
+    let!(:customer) { create(:customer) }
+    let!(:ability)  { Ability.new(customer.user) }
 
-      @deployment = FactoryGirl.create(:deployment, {
-       customer: FactoryGirl.create(:customer),
-       release: FactoryGirl.create(:release)
-      })
+    it "cannot manage anything" do
+      ability.can?(:manage, :all).should be false
+      ability.can?(:manage, Deployment).should be false
+      ability.can?(:manage, Customer).should be false
+      ability.can?(:manage, Release).should be false
+    end
 
-      @deployment.customer.user.should_not == nil
-      @deployment.customer.user.should_not == basic
+    it "can read own deployment and release but not manage them" do
+      deployment = create(:deployment, customer: customer)
+      release = deployment.release
+      deployment.customer.user.should == customer.user
 
-    	ability.can?(:read, @deployment).should == true
-	end	
+      ability.can?(:read, deployment).should be true
+      ability.can?(:manage, deployment).should be false
+
+      ability.can?(:read, release).should be true
+      ability.can?(:manage, release).should be false
+    end
+
+    it "cannot read other customer deployment" do
+      deployment = create(:deployment) # creates random customer and release
+      deployment.customer.user.should_not == customer.user
+      ability.can?(:read, deployment).should be false
+    end
+
+    it "cannot read other customers or releases" do
+      ability.can?(:read, create(:customer)).should be false
+      ability.can?(:read, create(:release)).should be false
+    end
   end
+
 end
