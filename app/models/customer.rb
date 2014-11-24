@@ -6,6 +6,13 @@ class Customer < ActiveRecord::Base
 	accepts_nested_attributes_for :releases
 	validates :name, :presence => true, :uniqueness => true
 
+	def self.random
+		order("RANDOM()").first
+	end
+
+	def self.without_deployment
+		references(:deployments).includes(:deployments).where("deployments.id IS NULL") 
+	end
 
 	def self.to_csv
 		CSV.generate do |csv|
@@ -18,6 +25,5 @@ class Customer < ActiveRecord::Base
 			end
 		end
 	end
+
 end
-
-

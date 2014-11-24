@@ -26,6 +26,22 @@
   width: 18%;
 }
 
+thead {
+  background: #e6f1f6;
+}
+
+
+.headerdiv {
+  padding: 3px;
+}
+
+.btn-nav {
+  background: rgba(150, 184, 194, 0.75);
+}
+.navcontent {
+  margin-top: 10px;
+  padding-left: 7px;
+}
 .link_box {
   background: blue;
 }
@@ -43,15 +59,17 @@
 }
 
 
-.nav {
-  margin-top: 5px;
+.navbar {
+  margin-top: 7px;
+
 }
 
 .nav_lang {
   position: absolute;
   top: 0px;
-  right: 100px;
-  margin-top: 5px;
+  right: 20px;
+  margin-top: 10px;
+
 }
 
 hr {

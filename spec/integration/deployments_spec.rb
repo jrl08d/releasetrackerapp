@@ -6,19 +6,16 @@ RSpec.describe "Deployments lookup" do
     @deployments_count = 5
 
     @deployments_count.times do
-      FactoryGirl.create :customer
-      FactoryGirl.create :release
-      FactoryGirl.create :deployment
+      create :deployment
     end
 
     Deployment.count.should == @deployments_count
 
-    # TODO: Add factory for User and use it here to refactor this code :)
-    #DONE
-    @user=FactoryGirl.create(:user)
+
+
+    @user = create(:admin)
     sign_in @user
   end
-
 
   it "should show list of deployments" do
     visit "/deployments"

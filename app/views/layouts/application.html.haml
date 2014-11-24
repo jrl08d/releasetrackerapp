@@ -10,23 +10,27 @@
   
 
     .container
-      .nav
-      - if current_user
-        Hello
-        = current_user.username
-        &nbsp;
-        &nbsp;
-        = link_to "Edit Profile", edit_user_path(current_user.id), :class => "btn btn-default btn-sm"
-        = link_to "Logout", :logout, :class => "btn btn-default btn-sm"
-      - else
-        = link_to "Register", new_user_path, :class => "btn btn-default btn-sm" | 
-        = link_to "Login", :login , :class => "btn btn-default btn-sm"
+      .navbar.navbar-default
+        .navcontent
+          - if current_user
+            &nbsp;
+            &nbsp;
+            %strong Hello
+            %strong= current_user.username
+            &nbsp;
+            &nbsp;
+            = link_to "Edit Profile", edit_user_path(current_user.id), :class => "btn btn-default btn-sm btn-nav"
+            = link_to "Logout", :logout, :class => "btn btn-default btn-sm btn-nav"
+          - else
+            = link_to "Register", new_user_path, :class => "btn btn-default btn-sm btn-nav" | 
+            = link_to "Login", :login , :class => "btn btn-default btn-sm btn-nav"
 
-      %span.nav_lang
-        Language:
-        = link_to_unless_current "English", locale: "en" , :class => "btn btn-link"
-        |
-        = link_to_unless_current "Wookieespeak", locale: "wk" , :class => "btn btn-link"
+          %span.nav_lang
+            Language:
+            = link_to_unless_current "English", locale: "en" , :class => "btn btn-link"
+            |
+            = link_to_unless_current "Wookieespeak", locale: "wk" , :class => "btn btn-link"
+
 
       - if notice 
         %p.alert.alert-success=notice

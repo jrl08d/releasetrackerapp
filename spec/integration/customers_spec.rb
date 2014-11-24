@@ -6,11 +6,13 @@ RSpec.describe "Customer lookup" do
     @customers_count = 10
 
     @customers_count.times do
-      FactoryGirl.create :customer
+      create :customer
     end
 
     Customer.count.should == @customers_count
-    @user=FactoryGirl.create(:user)
+
+    @user = create(:admin)
+
     sign_in @user
   end
 
@@ -23,9 +25,9 @@ RSpec.describe "Customer lookup" do
   it "should update cache whenever customer records change" do
     visit '/customers'
     page.should have_selector('table tbody tr', count: @customers_count)
-    FactoryGirl.create :customer
+    create :customer
 
-    Customer.count.should == (new_count = @customers_count + 1) 
+    Customer.count.should == (new_count = @customers_count + 1)
 
     visit '/customers'
     page.should have_selector('table tbody tr', count: new_count)
@@ -42,4 +44,3 @@ RSpec.describe "Customer lookup" do
 
 
 end
-

@@ -4,4 +4,9 @@ class Release < ActiveRecord::Base
 	accepts_nested_attributes_for :deployments
 	accepts_nested_attributes_for :customers
 	validates :version, :presence => true, :uniqueness => true
+
+	def self.random
+		order("RANDOM()").first
+	end
+	
 end
