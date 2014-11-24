@@ -1,0 +1,9 @@
+%br
+%div= will_paginate @deployments, renderer: BootstrapPagination::Rails 
+%br
+
+- if can? :manage, Customer
+  = link_to 'List of Customers', customers_path, :class => "btn btn-link"
+
+- if can? :read, Release
+  = link_to "Release History", releases_path, :class => "btn btn-link"
