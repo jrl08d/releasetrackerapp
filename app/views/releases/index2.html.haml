@@ -4,8 +4,8 @@
 %table.table.table-bordered.table-hover
   %thead
  
-    %th Version
-    %th Release Date
+    %th=sort_link @search, :version, "Version"
+    %th=sort_link @search, :release_date, "Release Date"
     %th Comments
 
   %tbody

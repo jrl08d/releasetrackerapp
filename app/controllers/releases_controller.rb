@@ -5,7 +5,8 @@ class ReleasesController < ApplicationController
   # GET /releases.json
   def index
     if current_user.admin?
-      @releases = Release.order("version ASC").paginate(:page => params[:page], :per_page => 12)
+      @search = Release.search(params[:q])
+      @releases = @search.result.paginate(:page => params[:page], :per_page => 12)
       render :index
     else
       @releases = Release.order("version ASC").paginate(:page => params[:page], :per_page => 12)
