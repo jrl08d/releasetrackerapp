@@ -46,12 +46,10 @@
   width: 54% !important;
 }
 
-#customers_table th .asc {
-  background-image: url(/images/up_arrow.gif);
-}
-#customers_table th .desc {
-  background-image: url(/images/down_arrow.gif);
-}
+
+.filter-table .quick { margin-left: 0.5em; font-size: 0.8em; text-decoration: none; }
+.fitler-table .quick:hover { text-decoration: underline; }
+td.alt { background-color: #ffc; background-color: rgba(255, 255, 0, 0.2); }
 
 .field.customer_form {
   margin-left: 190px;

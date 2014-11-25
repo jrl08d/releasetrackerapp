@@ -10,7 +10,7 @@
 
         %tfoot
           %tr
-            %th= f.text_field :name_cont
+            %th= f.text_field :name_cont,  :placeholder => "Search"
             %th 
             %th 
 
@@ -21,7 +21,6 @@
             %td= link_to customer.name, edit_customer_path(customer)
             %td= customer.deployments.collect { |a| a.deploy_date }.max
             %td= customer.releases.collect { |a| a.version }.max
-
 
 
 %br
