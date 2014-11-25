@@ -24,13 +24,13 @@ RSpec.describe "Customer lookup" do
 
   it "should update cache whenever customer records change" do
     visit '/customers'
-    page.should have_selector('table tbody tr', count: @customers_count)
+    page.should have_selector('table tr', count: @customers_count + 1)
     create :customer
 
     Customer.count.should == (new_count = @customers_count + 1)
 
     visit '/customers'
-    page.should have_selector('table tbody tr', count: new_count)
+    page.should have_selector('table tr', count: new_count)
   end
   #testing i18n translations
   describe "GET 'index'" do
