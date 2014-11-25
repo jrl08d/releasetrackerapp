@@ -16,8 +16,7 @@ class CustomersController < ApplicationController
           format.csv { render :csv => @customers}
         end
       else
-        @search = Customer.search(search_params)
-        @customers = @search.result().page(params[:page]).paginate(:per_page => 10, :page => params[:page])
+        @customers = Customer.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page])
         @deployments = Deployment.order("created_at DESC").limit(1)
         Resque.enqueue(CSVExportJob)
       end

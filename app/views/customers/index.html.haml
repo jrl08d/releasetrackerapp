@@ -2,9 +2,14 @@
 %h1= t "customers.index.title"
 %hr
 %br
+= form_tag customers_path, :method => 'get', :id => "customers_search" do
+  %p
+    = text_field_tag :search, params[:search]
+    = submit_tag "Search", :name => nil
+  #customers= render 'customers'
 
 
-#customers= render 'customers'
+
 
 %br
 

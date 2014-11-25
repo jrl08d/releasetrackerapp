@@ -1,27 +1,15 @@
 
-.custo_table
-= search_form_for @search, :remote=>"true", url: customers_path, :method => :get do |f|
-  %table.table.table-bordered.table-hover#customers_table
-    %thead
-      %tr
-        %th= sort_link @search, :name
-        %th Most Recent Deployment
-        %th Version
-
-        %tfoot
-          %tr
-            %th= f.text_field :name_cont,  :placeholder => "Search"
-            %th 
-            %th 
-
-    %tbody
-      - @customers.each do |customer| 
-        - cache(customer) do
-          %tr
-            %td= link_to customer.name, edit_customer_path(customer)
-            %td= customer.deployments.collect { |a| a.deploy_date }.max
-            %td= customer.releases.collect { |a| a.version }.max
-
-
+= hidden_field_tag :direction, params[:direction]
+= hidden_field_tag :sort, params[:sort]
+%table.table.table-bordered.table-hover#customers_table
+  %tr
+    %th= sortable "name"
+    %th Most Recent Deployment
+    %th Version
+  - for customer in @customers
+    %tr
+      %td= link_to customer.name, edit_customer_path(customer)
+      %td= customer.deployments.collect { |a| a.deploy_date }.max
+      %td= customer.releases.collect { |a| a.version }.max
 %br
 %div= will_paginate @customers, renderer: BootstrapPagination::Rails 

@@ -9,7 +9,6 @@
 //= require jquery.filtertable.min
 //= require turbolinks
 //= require_tree .
-
 $(function() {
   initPage();
 });
@@ -19,10 +18,13 @@ $(window).bind('page:change', function() {
 function initPage() {
   // Page ready code...
 
-    
 
-
-
-$('input#q_name_cont').quicksearch('table tbody tr');                              
-
+  $("customers th a, #customers .pagination a").on("click", function() {
+    $.getScript(this.href);
+    return false;
+  });
+  $("#customers_search input").keyup(function() {
+    $.get($("#customers_search").attr("action"), $("#customers_search").serialize(), null, "script");
+    return false;
+  });
 }
