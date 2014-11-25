@@ -21,11 +21,41 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
-
-#deployment_deploy_date {
-  width: 18%;
+.tabbable {
+  margin-top: 10px;
 }
 
+.customer_form {
+  margin-top: 20px;
+}
+
+.panel-body {
+  margin-top: 10px;
+}
+
+.customer_update_button {
+  margin-left: 15px;
+}
+.table {
+  border-radius: 5px;
+}
+#deployment_deploy_date {
+  width: 33% !important;
+}
+#release_release_date {
+  width: 54% !important;
+}
+
+#customers_table th .asc {
+  background-image: url(/images/up_arrow.gif);
+}
+#customers_table th .desc {
+  background-image: url(/images/down_arrow.gif);
+}
+
+.field.customer_form {
+  margin-left: 190px;
+}
 thead {
   background: #e6f1f6;
 }
@@ -72,7 +102,7 @@ thead {
 
 }
 
-hr {
+.form_divider {
   width:60%;
   margin-left: 0px;
   margin-right: auto;
@@ -92,8 +122,4 @@ tfoot input {
     tfoot {
     display: table-header-group;
 }
-.form-horizontal .form-group {
-  margin-left: 0px !important;
-  margin-right: 10px !important;
-  width: 50%  !important;
-}
+

@@ -1,4 +1,4 @@
-%h1 Release History
+= render "index_header"
 
 %table.table.table-bordered.table-hover
   %thead
@@ -18,10 +18,4 @@
       %td= link_to content_tag(:i,nil, :class=>"fa fa-edit"), edit_release_path(release), :class => "btn btn-link"
       %td= link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), release, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-link"
 
-%br
-%div= will_paginate @releases, renderer: BootstrapPagination::Rails 
-%br
-
-= link_to 'List of Customers', customers_path, :class => "btn btn-link"
-= link_to "Deployment History", deployments_path, :class => "btn btn-link"
-= link_to 'Add Release', new_release_path, :class => "btn btn-link"
+= render "index_footer"

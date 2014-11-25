@@ -1,5 +1,12 @@
-%h1 Editing user
-
-= render 'form'
-
-= link_to 'Back', root_path
+%body.uniquelogin
+  .col-md-3
+  #login_body.col-md-6
+    #login_form.panel.panel-primary
+      .panel-heading Edit User Info
+      .panel-body
+        = render "form"
+  .col-md-3
+%span.btn.btn-default.btn-xs
+  = link_to root_path do 
+    %i.fa.fa-long-arrow-left
+    Back

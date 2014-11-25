@@ -1,14 +1,20 @@
 
-= simple_form_for(@deployment, :html => { class: "form-group" }) do |f|
+= simple_form_for @deployment, html: { class: 'form-horizontal' },   |
+  wrapper: :horizontal_form,                                         |
+  wrapper_mappings: {                                                |
+    check_boxes: :horizontal_radio_and_checkboxes,                   |
+    radio_buttons: :horizontal_radio_and_checkboxes,                 |
+    file: :horizontal_file_input,                                    |
+    boolean: :horizontal_boolean                                     |
+  } do |f|                                                           |
   = f.error_notification
+  .field.customer_form
+    =f.label :deploy_date, :style => "float:left; margin-right:7px;"
 
-
-  .field
-    
     = f.text_field :deploy_date, as: :datepicker, type: "date", value: "#{Date.today}", :required => true, class: 'form-control'
   .hidden 
     = f.association :customer, class: "hidden"
-  .field
+  .form-group.customer_form
     = f.association :release, :label_method => :version, :value_method => :id,:required => true
-  .actions
+  .actions.customer_update_button
     = f.submit @deployment.new_record? ? "Submit" : "Submit Deployment", :class => 'btn btn-info' 

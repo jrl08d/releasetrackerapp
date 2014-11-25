@@ -1,9 +1,14 @@
-= simple_form_for(@user_session) do |f|
+= simple_form_for @user_session, html: { class: 'form-horizontal' }, |
+  wrapper: :horizontal_form,                                         |
+  wrapper_mappings: {                                                |
+    check_boxes: :horizontal_radio_and_checkboxes,                   |
+    radio_buttons: :horizontal_radio_and_checkboxes,                 |
+    file: :horizontal_file_input,                                    |
+    boolean: :horizontal_boolean                                     |
+  } do |f|                                                           |
   = f.error_notification
-
-  .form-inputs
-    = f.input :username
-    = f.input :password
-
+  .form-group
+    = f.input :username, placeholder: 'Username'
+    = f.input :password, placeholder: 'email'
   .form-actions
-    = f.button :submit, "Login"
+    = f.button :submit, "Login", :class => "btn btn-info btn-md"
