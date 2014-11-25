@@ -6,7 +6,7 @@ gem 'sqlite3'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
-gem 'jquery-rails'
+gem "jquery-rails", "~> 2.3.0"
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'autoprefixer-rails'
@@ -16,12 +16,16 @@ gem 'simple_form', github: 'plataformatec/simple_form', branch: 'master'
 gem "resque"
 gem 'factory_girl_rails'
 gem "cancan"
+gem 'rails3-jquery-autocomplete'
 gem 'faker'
-gem 'ransack'
+gem "ransack"
+# table pagination
+gem 'kaminari'
 gem 'will_paginate', '~> 3.0.5'
 gem 'jquery-datatables-rails', '~> 3.0.0'
 gem 'will_paginate-bootstrap'
 gem 'haml-rails'
+gem "smart_listing"
 gem 'authlogic'
 
 

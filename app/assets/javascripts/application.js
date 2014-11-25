@@ -1,9 +1,9 @@
 //= require jquery
-//= require bootstrap-sprockets
-//= require dataTables/jquery.dataTables
-//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require jquery_ujs
+//= require jquery-ui
+//= require autocomplete-rails
+//= require bootstrap-sprockets
 //= require jquery.livesearch
-//= require jquery.dataTables.min.js
 //= require turbolinks
 //= require_tree .
+

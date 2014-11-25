@@ -1,5 +1,8 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
+  before_action :clear_search_index, :only => [:index]
+  helper_method :sort_column, :sort_direction
+  
 
   # GET /customers
   # GET /customers.json
@@ -9,17 +12,14 @@ class CustomersController < ApplicationController
         @customers = Customer.order("name ASC")
         respond_to do |format|
           format.html
+          format.json 
           format.csv { render :csv => @customers}
         end
       else
-        @search = Customer.search(params[:q])
-        @customers = @search.result
+        @search = Customer.search(search_params)
+        @customers = @search.result().page(params[:page]).paginate(:per_page => 10, :page => params[:page])
         @deployments = Deployment.order("created_at DESC").limit(1)
         Resque.enqueue(CSVExportJob)
-        respond_to do |format|
-          format.html
-          format.csv { render :csv => @customers}
-        end
       end
     else
       @customer = current_user.customer
@@ -27,7 +27,6 @@ class CustomersController < ApplicationController
       Resque.enqueue(CSVExportJob)
       respond_to do |format|
         format.html {redirect_to deployments_path}
-        format.csv { render :csv => @customers}
       end
     end
   end
@@ -96,6 +95,13 @@ class CustomersController < ApplicationController
   end
 
   private
+    def sort_column
+      Customer.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+    
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_customer
       @customer = Customer.find(params[:id])
