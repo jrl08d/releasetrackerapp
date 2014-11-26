@@ -3,7 +3,7 @@ FactoryGirl.define do
   factory :user do
     username  { "#{Faker::Internet.user_name}_#{rand(1..9999)}" }
     email     { Faker::Internet.email }
-    password  { Faker::Internet.password(8) }
+    password  { "user" }
     password_confirmation { password }
 
     factory :admin do
