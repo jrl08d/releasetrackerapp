@@ -1,4 +1,8 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :operator do
+    user nil
+customer nil
+  end
+
 
   factory :user do
     username  { "#{Faker::Internet.user_name}_#{rand(1..9999)}" }
