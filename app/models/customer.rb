@@ -25,14 +25,14 @@ class Customer < ActiveRecord::Base
 			end
 		end
 	end
-	  def self.search(search)
-    if search
-      #case insensitive
-      where(['LOWER(name) LIKE LOWER(?) ', "%#{search}%"])
-    else
-      where(nil)
-    end
-  end
+	def self.search(search)
+    	if search
+      		#case insensitive
+      		where(['LOWER(name) LIKE LOWER(?) ', "%#{search}%"])
+    	else
+      		where(nil)
+    	end
+  	end
 
 
 end
