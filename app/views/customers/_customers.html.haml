@@ -8,8 +8,9 @@
     %th Version
   - for customer in @customers
     %tr
+      - most_recent_deployment = customer.deployments.includes(:release).order('deploy_date desc').first
       %td= link_to customer.name, edit_customer_path(customer)
-      %td= customer.deployments.collect { |a| a.deploy_date }.max
-      %td= customer.releases.collect { |a| a.version }.max
+      %td= most_recent_deployment ? most_recent_deployment.deploy_date : ""
+      %td= most_recent_deployment ? most_recent_deployment.release.version : ""
 %br
 %div= will_paginate @customers, renderer: BootstrapPagination::Rails 
