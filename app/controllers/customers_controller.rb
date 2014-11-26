@@ -2,27 +2,27 @@ class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
   before_action :clear_search_index, :only => [:index]
   helper_method :sort_column, :sort_direction
-  
+
 
   # GET /customers
   # GET /customers.json
   def index
     if current_user.admin?
-      if  request.format == "csv"
+      if request.format == "csv"
         @customers = Customer.order("name ASC")
         respond_to do |format|
           format.html
-          format.json 
+          format.json
           format.csv { render :csv => @customers}
         end
+        Resque.enqueue(CSVExportJob)
       else
         @customers = Customer.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page])
         @deployments = Deployment.order("created_at DESC").limit(1)
-        Resque.enqueue(CSVExportJob)
       end
     else
       @customer = current_user.customer
-      @deployments = Deployment.order("created_at DESC").limit(1)
+      @deployments = @customer.deployments
       Resque.enqueue(CSVExportJob)
       respond_to do |format|
         format.html {redirect_to deployments_path}
@@ -94,20 +94,20 @@ class CustomersController < ApplicationController
   end
 
   private
-    def sort_column
-      Customer.column_names.include?(params[:sort]) ? params[:sort] : "name"
-    end
-    
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-    end
-    # Use callbacks to share common setup or constraints between actions.
-    def set_customer
-      @customer = Customer.find(params[:id])
-    end
+  def sort_column
+    Customer.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def customer_params
-      params.require(:customer).permit(:name, :user_id)
-    end
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_customer
+    @customer = Customer.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def customer_params
+    params.require(:customer).permit(:name, :user_id)
+  end
 end
