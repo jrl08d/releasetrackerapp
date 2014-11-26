@@ -9,7 +9,8 @@ class ReleasesController < ApplicationController
       @releases = @search.result.paginate(:page => params[:page], :per_page => 12)
       render :index
     else
-      @releases = Release.order("version ASC").paginate(:page => params[:page], :per_page => 12)
+      @search = Release.search(params[:q])
+      @releases = @search.result.order("version ASC").paginate(:page => params[:page], :per_page => 12)
       render :index2
     end
   end
