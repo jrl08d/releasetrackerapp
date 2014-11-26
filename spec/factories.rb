@@ -1,4 +1,7 @@
-FactoryGirl.define do  factory :operator do
+FactoryGirl.define do  factory :issue do
+    
+  end
+  factory :operator do
     user nil
 customer nil
   end
