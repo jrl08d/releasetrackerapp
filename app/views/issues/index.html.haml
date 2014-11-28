@@ -1,0 +1,72 @@
+%h1 Issue
+.tabbable
+  %ul.nav.nav-tabs
+    %li.active
+      %a{"data-toggle" => "tab", :href => "#tab1"} Open Issues
+    %li
+      %a{"data-toggle" => "tab", :href => "#tab2"} Closed Issues
+  .tab-content
+    #tab1.tab-pane.active
+      %table.table.table-bordered.table-hover
+        %thead
+          %tr
+            %th
+            %th Title
+            %th Date Reported
+            %th Status
+            %th Customer
+            %th Severity
+            %th Release Version
+            %th
+      
+      
+        - @issues.each_with_index do |issue, i|
+          - if issue.status == "new" or issue.status == "assigned" or issue.status == "resolved"
+            %tbody
+              %tr
+                %td= (i+1)
+                %td= link_to issue.title, edit_issue_path(issue)
+                %td= issue.reported_date
+                %td{:class => "#{issue.status}" }= issue.status
+                %td= link_to issue.customer.name, edit_customer_path(issue.customer)
+                %td{:class => "#{issue.severity}" }= issue.severity
+                %td= issue.software_version
+                %td= link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), issue, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+    #tab2.tab-pane
+      %table.table.table-bordered.table-hover
+        %thead
+          %tr
+            %th
+            %th Title
+            %th Date Reported
+            %th Status
+            %th Customer
+            %th Severity
+            %th Release Version
+            %th
+        - @issues.each_with_index do |issue, i|
+          - if issue.status == "closed"
+            %tbody
+              %tr
+                %td= (i+1)
+                %td= link_to issue.title, edit_issue_path(issue)
+                %td= issue.reported_date
+                %td{:class => "#{issue.status}" }
+                  = issue.status
+                  =content_tag(:i,nil, :class=>"fa fa-check")
+                %td= issue.customer.name
+                %td{:class => "#{issue.severity}" }= issue.severity
+                %td= issue.software_version
+                %td= link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), issue, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+
+%br
+
+- if can? :manage, Customer
+  = link_to 'List of Customers', customers_path, :class => "btn btn-link"
+
+- if can? :read, Release
+  = link_to "Release History", releases_path, :class => "btn btn-link"
+- if can? :read, Deployment
+  = link_to "Deployment History", deployments_path, :class => "btn btn-link"

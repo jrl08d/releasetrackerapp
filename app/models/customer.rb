@@ -1,6 +1,5 @@
 class Customer < ActiveRecord::Base
 	belongs_to :user
-	has_many :operators
 	has_many :issues
 	has_many :deployments
 	has_many :releases, through: :deployments

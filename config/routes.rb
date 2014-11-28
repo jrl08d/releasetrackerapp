@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :issues
+
   resources :users, :user_sessions
   get 'login' => 'user_sessions#new', :as => :login
   get 'logout' => 'user_sessions#destroy', :as => :logout
