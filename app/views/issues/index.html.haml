@@ -12,11 +12,11 @@
           %tr
             %th
             %th Title
-            %th Date Reported
-            %th Status
-            %th Customer
-            %th Severity
-            %th Release Version
+            %th=sort_link @search, :reported_date, "Date Reported"
+            %th=sort_link @search, :status, "Status"
+            %th=sort_link @search, :customer_name, "Customer"
+            %th=sort_link @search, :severity, "Severity"
+            %th=sort_link @search, :release_version, "Release Version"
             %th
       
       
@@ -39,11 +39,11 @@
           %tr
             %th
             %th Title
-            %th Date Reported
-            %th Status
-            %th Customer
-            %th Severity
-            %th Release Version
+            %th=sort_link @search, :reported_date, "Date Reported"
+            %th=sort_link @search, :status, "Status"
+            %th=sort_link @search, :customer_name, "Customer"
+            %th=sort_link @search, :severity, "Severity"
+            %th=sort_link @search, :release_version, "Release Version"
             %th
         - @issues.each_with_index do |issue, i|
           - if issue.status == "closed"
@@ -61,6 +61,8 @@
                 %td= link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), issue, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 
+%br
+%div= will_paginate @issues, renderer: BootstrapPagination::Rails 
 %br
 
 - if can? :manage, Customer

@@ -4,7 +4,16 @@ class IssuesController < ApplicationController
   # GET /issues
   # GET /issues.json
   def index
-    @issues = Issue.all
+    @search = Issue.search(params[:q])
+    @customers = Customer.order('name ASC')
+    if params[:customer_filter].present?
+        @customer = Customer.find(params[:customer_filter]) 
+        @search = @customer.issues.search(params[:q])
+        @issues = @search.result.paginate(:page => params[:page], :per_page => 12)
+      else
+        @search = Issue.search(params[:q])
+        @issues = @search.result.paginate(:page => params[:page], :per_page => 12)
+      end
     @releases = Release.all
     authorize! :read, @issue
   end
