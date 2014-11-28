@@ -45,8 +45,13 @@ class CustomersController < ApplicationController
 
   # GET /customers/1/edit
   def edit
+    
+
+
 
     @deployment = @customer.deployments.build
+    @issue = @customer.issues.build
+    @issues = @customer.issues
     authorize! :update, @customer
 
   end

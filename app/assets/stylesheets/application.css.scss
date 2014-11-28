@@ -36,14 +36,55 @@
 .customer_update_button {
   margin-left: 15px;
 }
+
+.panel-secondary {
+  border-color: #0D3B69;
+}
+
+.upper-panel-heading {
+  font-size: 130%;
+}
+
+.container {
+  margin-bottom: 10px;
+}
+
+
+td.high {color: #FF0000;}
+td.low {color: #00C703;}
+td.medium {color: #FCEF00;}
+td.new {color: #0046FC;}
+td.assigned {color: #FCEF00;}
+td.resolved {color: #00C703;}
+td.closed {color: #00C703;}
+
+.issue_cust_page {
+  margin: 20px;
+}
+
+.panel-secondary > .panel-heading {
+  color: white;
+  background-color: #0D3B69;
+  border-color: #0D3B69;
+}
 .table {
   border-radius: 5px;
 }
 #deployment_deploy_date {
-  width: 33% !important;
+  width: 54.8% !important;
 }
 #release_release_date {
-  width: 54% !important;
+  width: 55% !important;
+}
+#issue_reported_date {
+  width: 55% !important;
+}
+
+.customer_panel_heading {
+  position: absolute;
+  top: 77px;
+  right: 132px;
+  margin-top: 10px;
 }
 
 #search {

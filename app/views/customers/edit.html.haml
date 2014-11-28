@@ -2,7 +2,10 @@
 
 #login_body.col-md-6
 #login_form.panel.panel-primary
-  .panel-heading #{"#{@customer.name}"}
+  .panel-heading.upper-panel-heading
+    #{"#{@customer.name}"} 
+    %span.customer_panel_heading
+      Currently Running Version: #{"#{@customer.deployments.includes(:release).order('deploy_date desc').first.release.version}"}
   .pannel-body
   .tabbable
     / Only required for left/right tabs
@@ -10,12 +13,70 @@
       %li.active
         %a{"data-toggle" => "tab", :href => "#tab1"} Edit #{"#{@customer.name}"}
       %li
-        %a{"data-toggle" => "tab", :href => "#tab2"} Add Deployment for #{"#{@customer.name}"}
+        %a{"data-toggle" => "tab", :href => "#tab2"} Add Deployment for #{"#{@customer.name}"}      
+      %li
+        %a{"data-toggle" => "tab", :href => "#tab3"} Submit an Issue
     .tab-content
       #tab1.tab-pane.active
         = render 'form'
       #tab2.tab-pane
-        = render 'deployments/form'
+        = render 'deployments/form'      
+      #tab3.tab-pane
+        = render 'issues/form'
+#login_body.col-md-6
+#login_form.panel.panel-secondary
+  .panel-heading Issues Submitted by #{"#{@customer.name}"} 
+    
+  .pannel-body
+  .tabbable
+    / Only required for left/right tabs
+    %ul.nav.nav-tabs
+      %li.active
+        %a{"data-toggle" => "tab", :href => "#tab4"} Open Issues
+      %li
+        %a{"data-toggle" => "tab", :href => "#tab5"} Closed Issues
+
+    .tab-content
+      #tab4.tab-pane.active
+        %table.table.table-striped
+          %thead
+            %tr
+              %th Title
+              %th Date Reported
+              %th Status
+              %th Release Version
+              %th Severity
+          %tbody
+            - @issues.each do |issue|
+              - if issue.status == "new" or issue.status == "assigned" or issue.status == "resolved"
+                %tr
+                  %td= link_to issue.title, edit_issue_path(issue)
+                  %td= issue.reported_date
+                  %td{:class => "#{issue.status}" }= issue.status
+                  %td= issue.software_version
+                  %td{:class => "#{issue.severity}" }= issue.severity
+
+      #tab5.tab-pane
+        %table.table.table-striped
+          %thead
+            %tr
+              %th Title
+              %th Date Reported
+              %th Status
+              %th Release Version
+              %th Severity
+          %tbody
+            - @issues.each do |issue|
+              - if issue.status == "closed"
+                %tr
+                  %td= link_to issue.title, edit_issue_path(issue)
+                  %td= issue.reported_date
+                  %td{:class => "#{issue.status}" }
+                    = issue.status
+                    =content_tag(:i,nil, :class=>"fa fa-check")
+                  %td= issue.software_version
+                  %td{:class => "#{issue.severity}" }= issue.severity
+
 
 
 %span.btn.btn-default.btn-xs
@@ -25,3 +86,5 @@
 	
 %span
   = link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), @customer, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default btn-sm"
+
+

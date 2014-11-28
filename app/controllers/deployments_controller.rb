@@ -24,6 +24,7 @@ class DeploymentsController < ApplicationController
       @customer = current_user.customer
       @search = Deployment.where(customer_id: @customer).search(params[:q])
       @deployments = @search.result.includes(:customer).includes(:release).paginate(:page => params[:page], :per_page => 12)
+
       render :index2
     end
   end
