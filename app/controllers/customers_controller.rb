@@ -51,7 +51,8 @@ class CustomersController < ApplicationController
 
     @deployment = @customer.deployments.build
     @issue = @customer.issues.build
-    @issues = @customer.issues
+    @search = @customer.issues.search(params[:q])
+    @issues = @search.result.paginate(:page => params[:page], :per_page => 12)
     authorize! :update, @customer
 
   end
