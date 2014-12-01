@@ -1,15 +1,24 @@
-
-= simple_form_for @customer, html: { class: 'form-horizontal' },     |
-  wrapper: :horizontal_form,                                         |
-  wrapper_mappings: {                                                |
-    check_boxes: :horizontal_radio_and_checkboxes,                   |
-    radio_buttons: :horizontal_radio_and_checkboxes,                 |
-    file: :horizontal_file_input,                                    |
-    boolean: :horizontal_boolean                                     |
-  } do |f|                                                           |
-  = f.error_notification
-  .form-group.customer_form
-    = f.input :name, placeholder: 'Name of Client', :required => true
-    = f.association :user, :label_method => :username
-  .form-actions.customer_update_button
-    = f.button :submit, "Submit", :class => "btn btn-info btn-md"
+= form_for(@customer, html: { :multipart => true, role:"form" }, html: { class: 'form-horizontal' }) do |f|
+  - if @customer.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@customer.errors.count, "error")
+        prohibited this customer from being saved:
+      %ul
+        - @customer.errors.full_messages.each do |message|
+          %li= message
+  %br
+    = simple_form_for @customer, html: { class: 'form-horizontal' },     |
+      wrapper: :horizontal_form,                                         |
+      wrapper_mappings: {                                                |
+        check_boxes: :horizontal_radio_and_checkboxes,                   |
+        radio_buttons: :horizontal_radio_and_checkboxes,                 |
+        file: :horizontal_file_input,                                    |
+        boolean: :horizontal_boolean                                     |
+      } do |f|                                                           |
+      = f.error_notification
+      .form-group.customer_form
+        = f.input :name, :input_html => {:required => true}, :placeholder => "Name of Client"
+        = f.association :user, :label_method => :username
+      .form-actions.customer_update_button
+        = f.button :submit, "Submit", :class => "btn btn-info btn-md"

@@ -1,0 +1,20 @@
+#login_body.col-md-6
+#login_form.panel.panel-primary
+  .panel-heading.upper-panel-heading
+    #{"#{@issue.title}"} 
+    %span.customer_panel_heading
+      Customer: #{"#{@issue.customer.name}"} 
+  .pannel-body
+    = render 'form'
+
+
+%span.btn.btn-default.btn-xs
+  = link_to url_for(:back) do 
+    %i.fa.fa-long-arrow-left
+    Back
+	
+%span
+  = link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), @issue, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default btn-sm"
+
+
+

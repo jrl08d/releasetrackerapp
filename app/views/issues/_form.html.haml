@@ -1,0 +1,35 @@
+= form_for(@issue, html: { :multipart => true, role:"form" }, html: { class: 'form-horizontal' }) do |f|
+  - if @issue.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@issue.errors.count, "error")
+        prohibited this customer from being saved:
+      %ul
+        - @issue.errors.full_messages.each do |message|
+          %li= message
+  %br
+    = simple_form_for @issue, html: { class: 'form-horizontal' },        |
+      wrapper: :horizontal_form,                                         |
+      wrapper_mappings: {                                                |
+        check_boxes: :horizontal_radio_and_checkboxes,                   |
+        radio_buttons: :horizontal_radio_and_checkboxes,                 |
+        file: :horizontal_file_input,                                    |
+        boolean: :horizontal_boolean                                     |
+      } do |f|                                                           |
+      = f.error_notification
+      .form-group.customer_form
+        = f.input :title, :input_html => {:required => true}
+        = f.input :description, :input_html => {:required => true}
+        = f.input :software_version, collection: Release.all, :label_method => :version, :input_html => {:required => true}
+        = f.input :reporter_name, :input_html => {:required => true}
+        = f.input :github_issue_number_reference
+        = f.input :severity, collection: ["low", "medium", "high"], :input_html => {:required => true}
+        = f.input :status, collection: ["new", "assigned", "resolved", "closed", "     rejected"], :input_html => {:required => true}
+      .field.customer_form
+        =f.label :reported_date, :style => "float:left; margin-right:31px; margin-left:-40px"
+     
+        = f.text_field :reported_date, as: :datepicker, type: "date", value: "#{Date.     today}", :required => true, class: 'form-control'
+      .hidden 
+        = f.association :customer, class: "hidden" 
+      .actions.customer_update_button
+        = f.submit @issue.new_record? ? "Submit" : "Submit", :class => 'btn btn-info' 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141120190423) do
+ActiveRecord::Schema.define(version: 20141201153613) do
 
   create_table "customers", force: true do |t|
     t.string   "name"
@@ -33,6 +33,32 @@ ActiveRecord::Schema.define(version: 20141120190423) do
 
   add_index "deployments", ["customer_id"], name: "index_deployments_on_customer_id"
   add_index "deployments", ["release_id"], name: "index_deployments_on_release_id"
+
+  create_table "issues", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "description"
+    t.date     "reported_date"
+    t.string   "software_version"
+    t.string   "reporter_name"
+    t.string   "severity"
+    t.integer  "github_issue_number_reference"
+    t.integer  "customer_id"
+    t.string   "status"
+    t.string   "title"
+  end
+
+  add_index "issues", ["customer_id"], name: "index_issues_on_customer_id"
+
+  create_table "operators", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "customer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "operators", ["customer_id"], name: "index_operators_on_customer_id"
+  add_index "operators", ["user_id"], name: "index_operators_on_user_id"
 
   create_table "releases", force: true do |t|
     t.string   "version"
