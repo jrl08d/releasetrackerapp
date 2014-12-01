@@ -8,6 +8,7 @@ unless Rails.env.production?
     Deployment.destroy_all
     Customer.destroy_all
     User.destroy_all
+    Issue.destroy_all
 
     customer_count = 20
     release_count = 30
@@ -30,6 +31,9 @@ unless Rails.env.production?
     # Seed Admin
     FactoryGirl.create :admin, username: 'admin', password: 'admin'
 
+    10.times do 
+      FactoryGirl.create :issue
+    end
   end
 
 end

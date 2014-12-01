@@ -1,10 +1,4 @@
-FactoryGirl.define do  factory :issue do
-    
-  end
-  factory :operator do
-    user nil
-customer nil
-  end
+FactoryGirl.define do 
 
 
   factory :user do
@@ -54,6 +48,17 @@ customer nil
     end
 
     deploy_date { Faker::Date.between(2.years.ago, Date.today) }
+  end
+
+  factory :issue do
+    title {Faker::Lorem.sentence}
+    description {Faker::Lorem.paragraph}
+    reported_date {Faker::Date.between(5.months.ago, Date.today)}
+    software_version {Release.take.version}
+    reporter_name {Faker::Name.name}
+    severity "low"
+    status "new"
+    customer
   end
 
 end
