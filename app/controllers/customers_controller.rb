@@ -46,6 +46,7 @@ class CustomersController < ApplicationController
   # GET /customers/1/edit
   def edit
     authorize! :update, @customer
+    @customer.users.build if @customer.users.none?
     get_customer_data
   end
 

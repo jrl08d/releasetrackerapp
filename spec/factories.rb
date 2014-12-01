@@ -1,4 +1,4 @@
-FactoryGirl.define do 
+FactoryGirl.define do
 
 
   factory :user do
@@ -14,7 +14,7 @@ FactoryGirl.define do
 
   factory :customer do
     name { Faker::Company.name }
-    user { create(:user) }
+    # TODO: create an associated user/operator
   end
 
   factory :release do
