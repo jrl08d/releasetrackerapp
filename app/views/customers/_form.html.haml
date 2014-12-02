@@ -1,15 +1,18 @@
-= simple_form_for @customer, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f|
+= form_for(@customer, html: { :multipart => true, role:"form" }, html: { class: 'form-horizontal' }) do |f|
 
-  = f.error_notification
 
-  .form-group.customer_form
-    = f.input :name, :input_html => {:required => true}, :placeholder => "Name of Client"
+  = simple_form_for @customer, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f|
 
-    = f.simple_fields_for :users do |u|
-      = u.input :username, :required => :true
-      = u.input :email, :required => :true
-      = u.input :password, :required => :true
-      = u.input :password_confirmation, :required => :true
+    = f.error_notification
 
-  .form-actions.customer_update_button
-    = f.button :submit, "Submit", :class => "btn btn-info btn-md"
+    .form-group.customer_form
+      = f.input :name, :input_html => {:required => true}, :placeholder => "Name of Client"
+
+      = f.simple_fields_for :users do |u|
+        = u.input :username, :input_html => {:required => true}
+        = u.input :email, :input_html => {:required => true}
+        = u.input :password, :input_html => {:required => true}
+        = u.input :password_confirmation, :input_html => {:required => true}
+
+    .form-actions.customer_update_button
+      = f.button :submit, "Submit", :class => "btn btn-info btn-md"

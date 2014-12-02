@@ -1,23 +1,21 @@
+= form_for(@release, html: { :multipart => true, role:"form" }, html: { class: 'form-horizontal' }) do |f|
+  = simple_form_for @release, html: { class: 'form-horizontal' },      |
+    wrapper: :horizontal_form,                                         |
+    wrapper_mappings: {                                                |
+      check_boxes: :horizontal_radio_and_checkboxes,                   |
+      radio_buttons: :horizontal_radio_and_checkboxes,                 |
+      file: :horizontal_file_input,                                    |
+      boolean: :horizontal_boolean                                     |
+    } do |f|                                                           |
+    = f.error_notification
+    .form-group
+      
+      = f.input :version, :input_html => {:required => true}
+      = f.input :comments
 
-= simple_form_for @release, html: { class: 'form-horizontal' },      |
-  wrapper: :horizontal_form,                                         |
-  wrapper_mappings: {                                                |
-    check_boxes: :horizontal_radio_and_checkboxes,                   |
-    radio_buttons: :horizontal_radio_and_checkboxes,                 |
-    file: :horizontal_file_input,                                    |
-    boolean: :horizontal_boolean                                     |
-  } do |f|                                                           |
-  = f.error_notification
-  .form-group
-    
-    = f.input :version
+    .field.customer_form
+      =f.label :release_date, :style => "float:left; margin-right:24px; margin-left:-23px;"
 
-  .field.customer_form
-    =f.label :release_date, :style => "float:left; margin-right:7px;"
-
-    = f.text_field :release_date, as: :datepicker, type: "date", value: "#{Date.today}", :required => true, class: 'form-control'
-  %br
-
-    = f.input :comments
-  .actions.customer_update_button
-    = f.submit @release.new_record? ? "Submit" : "Submit Release", :class => 'btn btn-info' 
+      = f.text_field :release_date, as: :datepicker, type: "date", value: "#{Date.today}", :input_html => {:required => true}, class: 'form-control'
+    .actions.customer_update_button
+      = f.submit @release.new_record? ? "Submit" : "Submit Release", :class => 'btn btn-info' 
