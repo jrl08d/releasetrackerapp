@@ -9,7 +9,7 @@
   - for customer in @customers
     %tr
       - most_recent_deployment = customer.deployments.includes(:release).order('deploy_date desc').first
-      %td= link_to customer.name, edit_customer_path(customer)
+      %td= link_to customer.name, customer
       %td= most_recent_deployment ? most_recent_deployment.deploy_date : ""
       %td= most_recent_deployment ? most_recent_deployment.release.version : ""
 %br

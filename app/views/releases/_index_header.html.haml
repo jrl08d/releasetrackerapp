@@ -1,2 +1,8 @@
-%h1 Release History
+%h1 
+  Release History
+  %span.add_button
+    - if can? :manage, Release
+      = link_to new_release_path, :class => "btn btn-primary btn-md" do
+        %i.fa.fa-plus
+        Add Release
 %hr
