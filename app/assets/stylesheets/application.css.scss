@@ -21,6 +21,10 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+#main-navbar {
+  margin-top: 0;
+}
+
 .tabbable {
   margin-top: 10px;
 }
@@ -179,4 +183,3 @@ tfoot input {
     tfoot {
     display: table-header-group;
 }
-
