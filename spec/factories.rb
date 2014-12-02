@@ -14,7 +14,12 @@ FactoryGirl.define do
 
   factory :customer do
     name { Faker::Company.name }
-    # TODO: create an associated user/operator
+
+    factory :customer_with_user do
+      after(:create) do |customer|
+        customer.users << create(:user) if customer.users.none?
+      end
+    end
   end
 
   factory :release do
