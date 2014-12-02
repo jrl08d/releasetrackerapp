@@ -10,7 +10,7 @@ RSpec.describe Customer, :type => :model do
   context 'associations' do
     it { should have_many(:deployments) }
     it { should have_many(:releases).through(:deployments)}
-    it { should belong_to(:user)}
+    it { should have_many(:users).through(:operators)}
   end
 
   #TODO How do we test these in Rails 4?

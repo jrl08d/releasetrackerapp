@@ -4,7 +4,7 @@ RSpec.describe User, :type => :model do
 
 
   context 'associations' do
-    it { should have_one(:customer) }
-    it { should have_many(:deployments).through(:customer) }
+    it { should have_many(:customers).through(:operators) }
+    it { should have_many(:deployments).through(:customers) }
   end
 end
