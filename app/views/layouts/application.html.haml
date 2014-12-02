@@ -21,11 +21,17 @@
 
             %ul.nav.navbar-nav
               %li
-                = link_to 'Customers', customers_path
+                - if can? :manage, Customer
+                  = link_to 'Customers', customers_path
               %li
-                = link_to 'Deployments', deployments_path
+                - if can? :read, Deployment
+                  = link_to 'Deployments', deployments_path
               %li
-                = link_to 'Releases', releases_path
+                - if can? :read, Release
+                  = link_to 'Releases', releases_path
+              %li
+                - if can? :manage, Issue
+                  = link_to 'Issues', issues_path
 
           %ul.nav.navbar-nav.navbar-right
             - if current_user

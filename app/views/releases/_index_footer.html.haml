@@ -1,13 +1,3 @@
 %br
 %div= will_paginate @releases, renderer: BootstrapPagination::Rails 
 %br
-
-
-- if can? :manage, Customer
-  = link_to 'List of Customers', customers_path, :class => "btn btn-link"
-- if can? :read, Deployment
-  = link_to "Deployment History", deployments_path, :class => "btn btn-link"
-- if can? :manage, Release
-  = link_to 'Add Release', new_release_path, :class => "btn btn-link"
-- if can? :read, Issue
-  = link_to 'Issue Tracker', issues_path, :class => "btn btn-link"

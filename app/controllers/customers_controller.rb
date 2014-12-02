@@ -33,7 +33,10 @@ class CustomersController < ApplicationController
   # GET /customers/1
   # GET /customers/1.json
   def show
-    @deployments = Deployment.order("created_at DESC").limit(1)
+    authorize! :update, @customer
+    authorize! :read, @customer
+    @customer.users.build if @customer.users.none?
+    get_customer_data
   end
 
   # GET /customers/new

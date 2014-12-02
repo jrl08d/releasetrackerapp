@@ -1,22 +1,16 @@
 
 %h1= t "customers.index.title"
 %hr
-%br
 = form_tag customers_path, :method => 'get', :id => "customers_search", :class => "form-search form-inline" do
   %p
     = text_field_tag :search, params[:search], :class => "form-control", :placeholder => "Search Customers"
     = submit_tag "Search", :name => nil, :class => "btn btn-info btn-md"
+    %span.add_button
+      = link_to new_customer_path, :class => "btn btn-primary btn-md" do
+        %i.fa.fa-plus
+        Add Customer
   #customers= render 'customers'
 
 
-
-
-%br
-
-= link_to 'Add Customer', new_customer_path, :class => "btn btn-link"
-= link_to "Add Release", new_release_path, :class => "btn btn-link"
-= link_to "Deployment History", deployments_path, :class => "btn btn-link"
-= link_to "Release History", releases_path, :class => "btn btn-link"
-= link_to "Issue Tracker", issues_path, :class => "btn btn-link"
 = link_to 'Download CSV list', customers_path(format: :csv), :class => "btn btn-link"
 
