@@ -1,7 +1,7 @@
 class DeploymentsController < ApplicationController
   helper_method :sort_column, :sort_direction
   before_action :set_deployment, only: [:show, :edit, :update, :destroy]
-  
+
 
   # GET /deployments
   # GET /deployments.json
@@ -9,7 +9,7 @@ class DeploymentsController < ApplicationController
     if current_user.admin?
        @customers = Customer.order('name ASC')
       if params[:customer_filter].present?
-        @customer = Customer.find(params[:customer_filter]) 
+        @customer = Customer.find(params[:customer_filter])
         @search = @customer.deployments.search(params[:q])
         @deployments = @search.result.paginate(:page => params[:page], :per_page => 12)
       else
@@ -21,7 +21,7 @@ class DeploymentsController < ApplicationController
         format.csv { render text: @deployments.to_csv }
       end
     else
-      @customer = current_user.customer
+      @customer = current_user.customers.first
       @search = Deployment.where(customer_id: @customer).search(params[:q])
       @deployments = @search.result.includes(:customer).includes(:release).paginate(:page => params[:page], :per_page => 12)
 
@@ -94,7 +94,7 @@ class DeploymentsController < ApplicationController
     def sort_column
       params[:sort] || "deploy_date"
     end
-  
+
     def sort_direction
       params[:direction] || "desc"
     end

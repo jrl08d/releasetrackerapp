@@ -8,13 +8,13 @@ class Ability
     if user.admin?
       can :manage, :all
 
-    elsif user.customer
+    elsif user.customers.any?
       can :read, Release do |release|
         release.customers.where(id: user.customer.id).count > 0
       end
 
       can :read, Deployment do |deployment|
-        deployment.customer.user == user
+        deployment.customer.users.include? user
       end
     end
   end

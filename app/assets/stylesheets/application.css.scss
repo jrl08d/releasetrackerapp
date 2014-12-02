@@ -78,17 +78,15 @@ td.closed {color: #00C703;}
   width: 54.8% !important;
 }
 #release_release_date {
-  width: 55% !important;
+  width: 55.5% !important;
 }
 #issue_reported_date {
   width: 55% !important;
 }
 
 .customer_panel_heading {
-  position: absolute;
-  top: 77px;
-  right: 132px;
-  margin-top: 10px;
+  width: 276px;
+  float: right;
 }
 
 #search {

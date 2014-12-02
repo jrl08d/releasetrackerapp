@@ -21,8 +21,8 @@ class CustomersController < ApplicationController
         @deployments = Deployment.order("created_at DESC").limit(1)
       end
     else
-      @customer = current_user.customer
-      @deployments = @customer.deployments
+      @customer = current_user.customers.first
+      @deployments = @customer.try(:deployments)
       Resque.enqueue(CSVExportJob)
       respond_to do |format|
         format.html {redirect_to deployments_path}
@@ -40,21 +40,14 @@ class CustomersController < ApplicationController
   def new
     @customer = Customer.new
     authorize! :create, @customer
-
+    @customer.users.build
   end
 
   # GET /customers/1/edit
   def edit
-    
-
-
-
-    @deployment = @customer.deployments.build
-    @issue = @customer.issues.build
-    @search = @customer.issues.search(params[:q])
-    @issues = @search.result.paginate(:page => params[:page], :per_page => 12)
     authorize! :update, @customer
-
+    @customer.users.build if @customer.users.none?
+    get_customer_data
   end
 
   # POST /customers
@@ -77,14 +70,18 @@ class CustomersController < ApplicationController
   # PATCH/PUT /customers/1
   # PATCH/PUT /customers/1.json
   def update
-    respond_to do |format|
-      if @customer.update(customer_params)
-        format.html { redirect_to customers_url, notice: 'Customer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @customer }
+    if @customer.update(customer_params)
+      notice = 'Customer was successfully updated.'
+      if @customer.new_record?
+        redirect_to customers_url, notice: notice
       else
-        format.html { render :edit }
-        format.json { render json: @customer.errors, status: :unprocessable_entity }
+        flash.now[:notice] = notice
+        get_customer_data
+        render :edit
       end
+    else
+      get_customer_data unless @customer.new_record?
+      render :edit
     end
   end
 
@@ -100,20 +97,35 @@ class CustomersController < ApplicationController
   end
 
   private
-  def sort_column
-    Customer.column_names.include?(params[:sort]) ? params[:sort] : "name"
-  end
 
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-  end
-  # Use callbacks to share common setup or constraints between actions.
-  def set_customer
-    @customer = Customer.find(params[:id])
-  end
+    def sort_column
+      Customer.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def customer_params
-    params.require(:customer).permit(:name, :user_id)
-  end
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_customer
+      @customer = Customer.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def customer_params
+      params.require(:customer).permit(:name, users_attributes: [
+        :id,
+        :username,
+        :email,
+        :password,
+        :password_confirmation
+      ])
+    end
+
+    def get_customer_data
+      @deployment = @customer.deployments.build
+      @issue = @customer.issues.build
+      @search = @customer.issues.search(params[:q])
+      @issues = @search.result.paginate(:page => params[:page], :per_page => 12)
+    end
+
 end

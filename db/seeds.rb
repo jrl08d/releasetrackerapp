@@ -1,39 +1,34 @@
 unless Rails.env.production?
 
+  Release.destroy_all
+  Deployment.destroy_all
+  Customer.destroy_all
+  User.destroy_all
+  Issue.destroy_all
 
+  customer_count = 20
+  release_count = 30
 
-  if Rails.env != 'production'
+  # Populate Customers
+  customer_count.times do
+    FactoryGirl.create :customer
+  end
 
-    Release.destroy_all
-    Deployment.destroy_all
-    Customer.destroy_all
-    User.destroy_all
-    Issue.destroy_all
+  # Populate Releases
+  release_count.times do |i|
+    FactoryGirl.create :release, version: "#{i + 1}.0.0"
+  end
 
-    customer_count = 20
-    release_count = 30
+  # Populate Deployments
+  (customer_count * 3).times do
+    FactoryGirl.create :deployment_for_existing_data
+  end
 
-    # Populate Customers
-    customer_count.times do
-      FactoryGirl.create :customer
-    end
+  # Seed Admin
+  FactoryGirl.create :admin, username: 'admin', password: 'admin'
 
-    # Populate Releases
-    release_count.times do |i|
-      FactoryGirl.create :release, version: "#{i + 1}.0.0"
-    end
-
-    # Populate Deployments
-    (customer_count * 3).times do
-      FactoryGirl.create :deployment_for_existing_data
-    end
-
-    # Seed Admin
-    FactoryGirl.create :admin, username: 'admin', password: 'admin'
-
-    10.times do 
-      FactoryGirl.create :issue
-    end
+  10.times do
+    FactoryGirl.create :issue
   end
 
 end

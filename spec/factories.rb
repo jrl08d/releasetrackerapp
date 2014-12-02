@@ -1,4 +1,4 @@
-FactoryGirl.define do 
+FactoryGirl.define do
 
 
   factory :user do
@@ -14,7 +14,12 @@ FactoryGirl.define do
 
   factory :customer do
     name { Faker::Company.name }
-    user { create(:user) }
+
+    factory :customer_with_user do
+      after(:create) do |customer|
+        customer.users << create(:user) if customer.users.none?
+      end
+    end
   end
 
   factory :release do
@@ -33,7 +38,7 @@ FactoryGirl.define do
 
   factory :deployment do
     deploy_date { Faker::Date.between(2.years.ago, Date.today) }
-    customer    { create(:customer) }
+    customer    { create(:customer_with_user) }
     release     { create(:release) }
   end
 
