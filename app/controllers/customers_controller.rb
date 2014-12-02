@@ -22,7 +22,7 @@ class CustomersController < ApplicationController
       end
     else
       @customer = current_user.customers.first
-      @deployments = @customer.deployments
+      @deployments = @customer.try(:deployments)
       Resque.enqueue(CSVExportJob)
       respond_to do |format|
         format.html {redirect_to deployments_path}

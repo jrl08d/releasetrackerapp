@@ -14,7 +14,7 @@ class Ability
       end
 
       can :read, Deployment do |deployment|
-        deployment.customer.user == user
+        deployment.customer.users.include? user
       end
     end
   end
