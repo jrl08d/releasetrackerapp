@@ -80,11 +80,11 @@ class CustomersController < ApplicationController
       else
         flash.now[:notice] = notice
         get_customer_data
-        render :edit
+        render :show
       end
     else
       get_customer_data unless @customer.new_record?
-      render :edit
+      render :show
     end
   end
 
