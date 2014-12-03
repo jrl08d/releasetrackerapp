@@ -51,8 +51,8 @@ RSpec.describe "Customer lookup" do
     end
 
     it "should redirect user to deployments index" do
-      visit 'customers'
-      page.should have_text("History")
+      visit '/customers'
+      page.should have_text("Deployment History")
     end
   end
 
