@@ -14,7 +14,7 @@
             - if issue.status == "new" or issue.status == "assigned" or issue.status == "resolved"
               %tbody
                 %tr
-                  %td= link_to issue.title, edit_issue_path(issue)
+                  %td= link_to issue.title, issue
                   %td= issue.reported_date
                   %td{:class => "#{issue.status}" }= issue.status
                   %td= link_to issue.customer.name, edit_customer_path(issue.customer)
@@ -32,7 +32,7 @@
             - if issue.status == "closed"
               %tbody
                 %tr
-                  %td= link_to issue.title, edit_issue_path(issue)
+                  %td= link_to issue.title, issue
                   %td= issue.reported_date
                   %td{:class => "#{issue.status}" }
                     = issue.status
