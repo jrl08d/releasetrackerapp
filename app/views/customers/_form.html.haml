@@ -7,12 +7,5 @@
 
     .form-group.customer_form
       = f.input :name, :input_html => {:required => true}, :placeholder => "Name of Client"
-
-      = f.simple_fields_for :users do |u|
-        = u.input :username, :input_html => {:required => true}
-        = u.input :email, :input_html => {:required => true}
-        = u.input :password, :input_html => {:required => true}
-        = u.input :password_confirmation, :input_html => {:required => true}
-
     .form-actions.customer_update_button
       = f.button :submit, "Submit", :class => "btn btn-info btn-md"

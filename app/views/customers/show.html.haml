@@ -13,15 +13,19 @@
       %li.active
         %a{"data-toggle" => "tab", :href => "#tab1"} Edit #{"#{@customer.name}"}
       %li
-        %a{"data-toggle" => "tab", :href => "#tab2"} Add Deployment for #{"#{@customer.name}"}      
+        %a{"data-toggle" => "tab", :href => "#tab2"} Add/Update User
       %li
-        %a{"data-toggle" => "tab", :href => "#tab3"} Submit an Issue
+        %a{"data-toggle" => "tab", :href => "#tab3"} Add Deployment for #{"#{@customer.name}"}      
+      %li
+        %a{"data-toggle" => "tab", :href => "#tab4"} Submit an Issue
     .tab-content
       #tab1.tab-pane.active
         = render 'form'
       #tab2.tab-pane
-        = render 'deployments/form'      
+        = render "user_form"
       #tab3.tab-pane
+        = render 'deployments/form'      
+      #tab4.tab-pane
         = render 'issues/form'
 #login_body.col-md-6
 #login_form.panel.panel-secondary
@@ -32,12 +36,12 @@
     / Only required for left/right tabs
     %ul.nav.nav-tabs
       %li.active
-        %a{"data-toggle" => "tab", :href => "#tab4"} Open Issues
+        %a{"data-toggle" => "tab", :href => "#tab5"} Open Issues
       %li
-        %a{"data-toggle" => "tab", :href => "#tab5"} Closed Issues
+        %a{"data-toggle" => "tab", :href => "#tab6"} Closed Issues
 
     .tab-content
-      #tab4.tab-pane.active
+      #tab5.tab-pane.active
         %table.table.table-striped
           - if @issues.where(:status => "new").length > 0 or @issues.where(:status => "assigned").length > 0 or @issues.where(:status => "resolved").length > 0 
             %thead
@@ -59,7 +63,7 @@
           - elsif @issues.where(:status => "new").length == 0 or @issues.where(:status => "assigned").length == 0 or @issues.where(:status => "resolved").length == 0 
             = render "issues/issue_table_body"
 
-      #tab5.tab-pane
+      #tab6.tab-pane
         %table.table.table-striped 
           - if @issues.where(:status => "closed").length > 0 
             %thead
