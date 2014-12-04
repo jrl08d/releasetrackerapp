@@ -6,7 +6,8 @@
       - if can? :manage, Issue
         = link_to edit_issue_path(@issue), :class => "btn btn-primary btn-md" do
           %i.fa.fa-edit
-          Edit
+          Edit Issue
+        = link_to content_tag(:i,nil, :class=>"fa fa-trash-o fa-2x"), @issue, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-primary btn-sm"
   - if @issue.status == "new" or @issue.status == "assigned" or @issue.status == "resolved"
     %div{:class => "status status-#{@issue.status}"}
       =content_tag(:i,nil, :class=>"fa fa-clock-o")
