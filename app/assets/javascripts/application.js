@@ -5,10 +5,11 @@
 //= require bootstrap-sprockets
 //= require best_in_place
 //= require jquery.livesearch
-//= require bootstrap-markdown-bundle
 //= require jquery.dataTables.min
 //= require jquery.quicksearch
 //= require jquery.filtertable.min
+//= require bootstrap.markdown.js
+//= require bootstrap-markdown-bundle
 //= require turbolinks
 //= require_tree .
 $(function() {
