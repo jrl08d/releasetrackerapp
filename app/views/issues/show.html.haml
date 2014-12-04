@@ -2,10 +2,20 @@
   %h1
     = @issue.title
     %small Issue for: #{@issue.customer.name} -- Running Version: #{@issue.software_version}
+    %span.add_button
+      - if can? :manage, Issue
+        = link_to edit_issue_path(@issue), :class => "btn btn-primary btn-md" do
+          %i.fa.fa-edit
+          Edit
+  - if @issue.status == "new" or @issue.status == "assigned" or @issue.status == "resolved"
+    %div{:class => "status status-#{@issue.status}"}
+      =content_tag(:i,nil, :class=>"fa fa-clock-o")
+      = @issue.status
+  - elsif @issue.status == "closed"
+    %div{:class => "status status-#{@issue.status}"}
+      =content_tag(:i,nil, :class=>"fa fa-check")
+      = @issue.status
 
-  %div{:class => "status status-#{@issue.status}"}
-    =content_tag(:i,nil, :class=>"fa fa-clock-o")
-    = @issue.status
   %span{:class => "status severity severity-#{@issue.severity}"}
     =content_tag(:i,nil, :class=>"fa fa-exclamation-triangle")
     = @issue.severity
@@ -26,19 +36,29 @@
     .timeline-comment-text= @issue.description
   %hr
 
-
 - @issue.comments.each do |comment|
-  %p
-    = comment.body
-    %br
-      Added on: #{comment.created_at}
-      Created by: #{comment.user.username}
+  .timeline-comment-wrapper
+    .avatar_commenter=content_tag(:i,nil, :class=>"fa fa-user fa-3x")
+    .timeline-comment
+      .timeline-comment-header
+        %strong #{comment.user.username}
+        commented #{time_ago_in_words(comment.created_at)} ago
+
+      .timeline-comment-text= comment.body
+
+
+
     %br 
-      = link_to content_tag(:i,nil, :class=>"fa fa-trash-o fa-lg"), comment, method: :delete, data: { confirm: 'Delete Discussion?' }, :class => "btn btn-default", :id=>"comment_delete"
+      - if comment.user.id == current_user.id
+        = link_to content_tag(:i,nil, :class=>"fa fa-trash-o fa-lg"), comment, method: :delete, data: { confirm: 'Delete Discussion?' }, :class => "btn btn-default", :id=>"comment_delete"
+    %hr
 
 .timeline-comment-wrapper
+  .avatar_commenter=content_tag(:i,nil, :class=>"fa fa-comment fa-3x")
   = render 'comments/form'
 
-= link_to 'Edit', edit_issue_path(@issue)
-\|
-= link_to 'Back', issues_path
+
+%span.btn.btn-default.btn-xs
+  = link_to issues_path do 
+    %i.fa.fa-long-arrow-left
+    Back

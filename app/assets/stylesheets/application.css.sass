@@ -98,7 +98,6 @@ td.closed
   float: right
 
 .add_button
-  width: 132px
   float: right
 
 #search
@@ -114,11 +113,28 @@ td.closed
 
 .status-new
   color: #fff
-  background-color: #6cc644
+  background-color: #0046fc
+.status-assigned
+  color: #fff
+  background-color: #fcef00
+.status-resolved
+  color: #fff
+  background-color: #00c703
+.status-closed
+  color: #fff
+  background-color: #00c703
+
 
 .severity-medium
   color: #fff
   background-color: #fcef00
+
+.severity-low
+  color: #fff
+  background-color: #6cc644
+.severity-high
+  color: #fff
+  background-color: red
 
 .severity 
   margin-left: 2px
@@ -130,6 +146,8 @@ td.closed
   background-color: #fff
   border: 1px solid #ddd
   border-radius: 3px
+  overflow:auto
+  text-overflow: ellipsis
 
 .timeline-comment-wrapper
   position: relative
@@ -139,6 +157,9 @@ td.closed
   margin-bottom: 15px
   border-top: 2px solid #fff
   border-bottom: 2px solid #fff
+  overflow:auto
+  text-overflow: ellipsis
+
 
 .timeline-comment-header 
   padding-left: 15px
@@ -153,27 +174,7 @@ td.closed
 
 
 
-.timeline-comment:after, .timeline-comment:before
-  right: 100%
-  top: 50%
-  border: solid transparent
-  content: " "
-  height: 0
-  width: 0
-  position: absolute
-  pointer-events: none
 
-.timeline-comment:after
-  border-color: rgba(136, 183, 213, 0)
-  border-right-color: #f7f7f7
-  border-width: 9px
-  margin-top: -48px
-
-.timeline-comment:before
-  border-color: rgba(194, 225, 245, 0)
-  border-right-color: #dddddd
-  border-width: 10px
-  margin-top: -49px
 
 .avatar_commenter
   float: left
@@ -189,6 +190,8 @@ td.closed
   padding: 15px
   overflow: visible
   font-size: 14px
+  overflow:auto
+  text-overflow: ellipsis
 
 #customers_table th .current
   padding-right: 12px
