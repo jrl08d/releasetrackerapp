@@ -43,14 +43,13 @@
       .timeline-comment-header
         %strong #{comment.user.username}
         commented #{time_ago_in_words(comment.created_at)} ago
+        - if comment.user.id == current_user.id
+          .delete-comment= link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), comment, method: :delete, data: { confirm: 'Delete Discussion?' }, :class => "btn btn-default", :id=>"comment_delete"
+          .edit-comment= link_to content_tag(:i,nil, :class=>"fa fa-pencil"), [:edit, @issue, comment], :class => "btn btn-default", :id=>"comment_delete"
 
       .timeline-comment-text= markdown(comment.body)
 
 
-
-    %br 
-      - if comment.user.id == current_user.id
-        = link_to content_tag(:i,nil, :class=>"fa fa-trash-o fa-lg"), comment, method: :delete, data: { confirm: 'Delete Discussion?' }, :class => "btn btn-default", :id=>"comment_delete"
     %hr
 
 .timeline-comment-wrapper

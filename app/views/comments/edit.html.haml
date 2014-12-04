@@ -1,7 +1,9 @@
-%h1 Editing comment
+%h1 Edit comment
+%hr
 
 = render 'form'
 
-= link_to 'Show', @comment
-\|
-= link_to 'Back', comments_path
+%span.btn.btn-default.btn-xs
+  = link_to @issue do 
+    %i.fa.fa-long-arrow-left
+    Back
