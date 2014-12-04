@@ -26,6 +26,7 @@ unless Rails.env.production?
 
   # Seed Admin
   FactoryGirl.create :admin, username: 'admin', password: 'admin'
+  FactoryGirl.create :admin, username: 'admin2', password: 'admin'
 
   10.times do
     FactoryGirl.create :issue
