@@ -10,11 +10,11 @@
   - if @issue.status == "new" or @issue.status == "assigned" or @issue.status == "resolved"
     %div{:class => "status status-#{@issue.status}"}
       =content_tag(:i,nil, :class=>"fa fa-clock-o")
-      = @issue.status
+      = best_in_place @issue, :status, type: :select, collection: ["new", "assigned", "resolved", "closed"]
   - elsif @issue.status == "closed"
     %div{:class => "status status-#{@issue.status}"}
       =content_tag(:i,nil, :class=>"fa fa-check")
-      = @issue.status
+      = best_in_place @issue, :status, type: :select, collection: ["new", "assigned", "resolved", "closed"]
 
   %span{:class => "status severity severity-#{@issue.severity}"}
     =content_tag(:i,nil, :class=>"fa fa-exclamation-triangle")

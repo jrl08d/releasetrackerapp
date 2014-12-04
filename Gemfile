@@ -17,6 +17,7 @@ gem "resque"
 gem 'factory_girl_rails'
 gem "cancan"
 gem 'rails3-jquery-autocomplete'
+gem "best_in_place"
 gem 'faker'
 gem "ransack"
 # table pagination
