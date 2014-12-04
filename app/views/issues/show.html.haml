@@ -18,7 +18,7 @@
 
   %span{:class => "status severity severity-#{@issue.severity}"}
     =content_tag(:i,nil, :class=>"fa fa-exclamation-triangle")
-    = @issue.severity
+    = best_in_place @issue, :severity, type: :select, collection: ["low", "medium", "high"]
   %span
     %strong #{@issue.reporter_name} 
     opened this issue on #{@issue.reported_date} 
