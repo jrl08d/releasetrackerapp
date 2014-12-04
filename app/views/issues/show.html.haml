@@ -1,10 +1,64 @@
-%p#notice= notice
 %p
-  %strong Name:
-  = @issue.description
+  %h1
+    = @issue.title
+    %small Issue for: #{@issue.customer.name} -- Running Version: #{@issue.software_version}
+    %span.add_button
+      - if can? :manage, Issue
+        = link_to edit_issue_path(@issue), :class => "btn btn-primary btn-md" do
+          %i.fa.fa-edit
+          Edit
+  - if @issue.status == "new" or @issue.status == "assigned" or @issue.status == "resolved"
+    %div{:class => "status status-#{@issue.status}"}
+      =content_tag(:i,nil, :class=>"fa fa-clock-o")
+      = best_in_place @issue, :status, type: :select, collection: ["new", "assigned", "resolved", "closed"]
+  - elsif @issue.status == "closed"
+    %div{:class => "status status-#{@issue.status}"}
+      =content_tag(:i,nil, :class=>"fa fa-check")
+      = best_in_place @issue, :status, type: :select, collection: ["new", "assigned", "resolved", "closed"]
 
-  .div= @issue.customer.name
+  %span{:class => "status severity severity-#{@issue.severity}"}
+    =content_tag(:i,nil, :class=>"fa fa-exclamation-triangle")
+    = best_in_place @issue, :severity, type: :select, collection: ["low", "medium", "high"]
+  %span
+    %strong #{@issue.reporter_name} 
+    opened this issue on #{@issue.reported_date} 
+  %span
+    %strong &nbsp; · &nbsp; #{@issue.comments.size}
+    comments
+  %hr
+.timeline-comment-wrapper
+  .avatar_commenter=content_tag(:i,nil, :class=>"fa fa-user fa-3x")
+  .timeline-comment
+    .timeline-comment-header
+      %strong #{@issue.reporter_name}
+      commented #{time_ago_in_words(@issue.created_at)} ago
 
-= link_to 'Edit', edit_issue_path(@issue)
-\|
-= link_to 'Back', issues_path
+    .timeline-comment-text= @issue.description
+  %hr
+
+- @issue.comments.each do |comment|
+  .timeline-comment-wrapper
+    .avatar_commenter=content_tag(:i,nil, :class=>"fa fa-user fa-3x")
+    .timeline-comment
+      .timeline-comment-header
+        %strong #{comment.user.username}
+        commented #{time_ago_in_words(comment.created_at)} ago
+
+      .timeline-comment-text= markdown(comment.body)
+
+
+
+    %br 
+      - if comment.user.id == current_user.id
+        = link_to content_tag(:i,nil, :class=>"fa fa-trash-o fa-lg"), comment, method: :delete, data: { confirm: 'Delete Discussion?' }, :class => "btn btn-default", :id=>"comment_delete"
+    %hr
+
+.timeline-comment-wrapper
+  .avatar_commenter=content_tag(:i,nil, :class=>"fa fa-comment fa-3x")
+  = render 'comments/form'
+
+
+%span.btn.btn-default.btn-xs
+  = link_to issues_path do 
+    %i.fa.fa-long-arrow-left
+    Back

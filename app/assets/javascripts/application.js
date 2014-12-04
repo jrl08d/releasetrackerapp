@@ -3,7 +3,9 @@
 //= require jquery-ui
 //= require autocomplete-rails
 //= require bootstrap-sprockets
+//= require best_in_place
 //= require jquery.livesearch
+//= require bootstrap-markdown-bundle
 //= require jquery.dataTables.min
 //= require jquery.quicksearch
 //= require jquery.filtertable.min

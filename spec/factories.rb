@@ -56,10 +56,10 @@ FactoryGirl.define do
   end
 
   factory :issue do
-    title {Faker::Lorem.sentence}
-    description {Faker::Lorem.paragraph}
+    title {Faker::Lorem.word}
+    description {Faker::Lorem.sentence}
     reported_date {Faker::Date.between(5.months.ago, Date.today)}
-    software_version { create(:release) }
+    software_version { Release.take.version }
     reporter_name {Faker::Name.name}
     severity "low"
     status "new"

@@ -21,17 +21,21 @@ class IssuesController < ApplicationController
   # GET /issues/1
   # GET /issues/1.json
   def show
+    @comment = Comment.new
+    @user = current_user
   end
 
   # GET /issues/new
   def new
     @issue = Issue.new
     authorize! :create, @issue
+    @issue.users.build
   end
 
   # GET /issues/1/edit
   def edit
     authorize! :update, @issue
+    @comment = @issue.comments.build
   end
 
   # POST /issues

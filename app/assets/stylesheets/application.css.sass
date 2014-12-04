@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+ *= require bootstrap-markdown
  *= require_self
  */
 
@@ -48,7 +49,7 @@ td.high
   color: #FF0000
 
 td.low
-  color: #00C703
+  color: #6cc644
 
 td.medium
   color: #FCEF00
@@ -98,11 +99,100 @@ td.closed
   float: right
 
 .add_button
-  width: 132px
   float: right
 
 #search
   width: 33% !important
+
+.status
+  display: inline-block
+  padding: 4px 8px
+  font-weight: bold
+  line-height: 20px
+  text-align: center
+  border-radius: 3px
+
+.status-new
+  color: #fff
+  background-color: #0046fc
+.status-assigned
+  color: #fff
+  background-color: #fcef00
+.status-resolved
+  color: #fff
+  background-color: #00c703
+.status-closed
+  color: #fff
+  background-color: #00c703
+
+
+.severity-medium
+  color: #fff
+  background-color: #fcef00
+
+.severity-low
+  color: #fff
+  background-color: #6cc644
+.severity-high
+  color: #fff
+  background-color: red
+
+.severity 
+  margin-left: 2px
+  margin-right: 8px
+
+
+.timeline-comment
+  position: relative
+  background-color: #fff
+  border: 1px solid #ddd
+  border-radius: 3px
+  overflow:auto
+  text-overflow: ellipsis
+
+.timeline-comment-wrapper
+  position: relative
+  padding-left: 64px
+  margin-top: 15px
+  margin-right: 265px
+  margin-bottom: 15px
+  border-top: 2px solid #fff
+  border-bottom: 2px solid #fff
+  overflow:auto
+  text-overflow: ellipsis
+
+
+.timeline-comment-header 
+  padding-left: 15px
+  padding-right: 15px
+  color: #999
+  background-color: #f7f7f7
+  border-bottom: 1px solid #eee
+  border-top-left-radius: 3px
+  border-top-right-radius: 3px
+  padding-top: 10px
+  padding-bottom: 10px
+
+
+
+
+
+.avatar_commenter
+  float: left
+  margin-left: -64px
+  border-radius: 3px
+
+
+.timeline-comment-text
+  max-width: 78%
+  padding-top: 10px
+  padding-bottom: 10px
+  width: 100%
+  padding: 15px
+  overflow: visible
+  font-size: 14px
+  overflow:auto
+  text-overflow: ellipsis
 
 #customers_table th .current
   padding-right: 12px
@@ -171,6 +261,9 @@ thead
   top: 0px
   right: 20px
   margin-top: 10px
+
+.comment-body
+  width: 100% !important
 
 .form_divider
   width: 60%
