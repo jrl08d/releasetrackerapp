@@ -44,7 +44,7 @@
         %strong #{comment.user.username}
         commented #{time_ago_in_words(comment.created_at)} ago
 
-      .timeline-comment-text= comment.body
+      .timeline-comment-text= markdown comment.body
 
 
 

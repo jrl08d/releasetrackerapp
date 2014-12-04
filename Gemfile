@@ -16,6 +16,8 @@ gem 'simple_form', github: 'plataformatec/simple_form', branch: 'master'
 gem "resque"
 gem 'factory_girl_rails'
 gem "cancan"
+gem 'rails-bootstrap-markdown'
+gem 'redcarpet'
 gem 'rails3-jquery-autocomplete'
 gem "best_in_place"
 gem 'faker'
