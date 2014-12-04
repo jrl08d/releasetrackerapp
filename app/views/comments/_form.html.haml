@@ -1,0 +1,10 @@
+= simple_form_for(@comment) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :body, :label => false, :placeholder => "New Comment"
+ 
+    = f.hidden_field :issue_id, value: @issue.id
+    = f.hidden_field :user_id, value: @current_user.id
+  .form-actions
+    = f.button :submit, "Submit", :class => 'btn btn-info' 
