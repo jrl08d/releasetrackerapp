@@ -1,19 +1,19 @@
-= form_for(@user, html: { :multipart => true, role:"form" }, html: { class: 'form-horizontal' }) do |f|
-  = simple_form_for @user, html: { class: 'form-horizontal' }, |
-    wrapper: :horizontal_form,                                         |
-    wrapper_mappings: {                                                |
-      check_boxes: :horizontal_radio_and_checkboxes,                   |
-      radio_buttons: :horizontal_radio_and_checkboxes,                 |
-      file: :horizontal_file_input,                                    |
-      boolean: :horizontal_boolean                                     |
-    } do |f|                                                           |
-    = f.error_notification
-    .form-group
-      = f.input :username, :input_html => {:required => true}
-      = f.input :email, :input_html => {:required => true}
-      = f.input :password, :input_html => {:required => true}
-      = f.input :password_confirmation, :input_html => {:required => true}
-      = f.input :admin, as: :select, :label => "Register as Admin?",:input_html => {:required => true}
 
-    .form-actions
-      = f.button :submit, "Register", :class => "btn btn-info btn-md"
+= simple_form_for @user, html: { class: 'form-horizontal' }, |
+  wrapper: :horizontal_form,                                         |
+  wrapper_mappings: {                                                |
+    check_boxes: :horizontal_radio_and_checkboxes,                   |
+    radio_buttons: :horizontal_radio_and_checkboxes,                 |
+    file: :horizontal_file_input,                                    |
+    boolean: :horizontal_boolean                                     |
+  } do |f|                                                           |
+  = f.error_notification
+  .form-group
+    = f.input :username, :input_html => {:required => true}
+    = f.input :email, :input_html => {:required => true}
+    = f.input :password, :input_html => {:required => true}
+    = f.input :password_confirmation, :input_html => {:required => true}
+    = f.input :admin, as: :select, :label => "Register as Admin?",:input_html => {:required => true}
+
+  .form-actions
+    = f.button :submit, "Register", :class => "btn btn-info btn-md"

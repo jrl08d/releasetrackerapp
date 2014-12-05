@@ -1,4 +1,5 @@
 class Deployment < ActiveRecord::Base
+	include ActiveModel::Validations
 	belongs_to :customer
 	belongs_to :release
 	
