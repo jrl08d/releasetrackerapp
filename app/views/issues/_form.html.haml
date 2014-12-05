@@ -10,7 +10,7 @@
   .form-group.customer_form
     = f.input :title, :input_html => {:required => true}
     = f.input :description, :input_html => {:required => true}
-    = f.input :software_version, collection: Release.all, :label_method => :version, :value_method => :version, :input_html => {:required => true}
+    = f.input :software_version, collection: Release.all, :label_method => :version, :value_method => :version, :selected => @issue.customer.deployments.includes(:release).order('deploy_date desc').first.release.version, :input_html => {:required => true}
     = f.hidden_field :user_id, value: @current_user.id
     = f.input :github_issue_number_reference
     = f.input :severity, collection: ["low", "medium", "high"], :input_html => {:required => true}
