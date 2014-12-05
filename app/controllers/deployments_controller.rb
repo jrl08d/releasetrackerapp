@@ -13,7 +13,7 @@ class DeploymentsController < ApplicationController
         @search = @customer.deployments.search(params[:q])
         @deployments = @search.result.paginate(:page => params[:page], :per_page => 12)
       else
-        @search = Deployment.search(params[:q])
+        @search = Deployment.order('deploy_date DESC').search(params[:q])
         @deployments = @search.result.includes(:customer).includes(:release).paginate(:page => params[:page], :per_page => 12)
       end
       respond_to do |format|
