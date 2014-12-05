@@ -59,7 +59,7 @@ FactoryGirl.define do
     title {Faker::Lorem.word}
     description {Faker::Lorem.sentence}
     reported_date {Faker::Date.between(5.months.ago, Date.today)}
-    software_version { Release.take.version }
+    software_version { "1.0.0" }
     reporter_name {Faker::Name.name}
     severity "low"
     status "new"
