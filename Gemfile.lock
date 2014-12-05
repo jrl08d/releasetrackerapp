@@ -107,6 +107,9 @@ GEM
     jquery-rails (2.3.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-turbolinks (2.1.0)
+      railties (>= 3.1.0)
+      turbolinks
     json (1.8.1)
     kaminari (0.16.1)
       actionpack (>= 3.0.0)
@@ -250,6 +253,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-datatables-rails (~> 3.0.0)
   jquery-rails (~> 2.3.0)
+  jquery-turbolinks
   kaminari
   rails (= 4.1.7)
   rails-bootstrap-markdown
