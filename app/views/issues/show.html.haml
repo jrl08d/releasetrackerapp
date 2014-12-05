@@ -21,7 +21,7 @@
     =content_tag(:i,nil, :class=>"fa fa-exclamation-triangle")
     = best_in_place @issue, :severity, type: :select, collection: ["low", "medium", "high"]
   %span
-    %strong #{@issue.reporter_name} 
+    %strong #{@issue.user.username} 
     opened this issue on #{@issue.reported_date} 
   %span
     %strong &nbsp; · &nbsp; #{@issue.comments.size}
@@ -31,7 +31,7 @@
   .avatar_commenter=content_tag(:i,nil, :class=>"fa fa-user fa-3x")
   .timeline-comment
     .timeline-comment-header
-      %strong #{@issue.reporter_name}
+      %strong #{@issue.user.username}
       commented #{time_ago_in_words(@issue.created_at)} ago
 
     .timeline-comment-text= @issue.description

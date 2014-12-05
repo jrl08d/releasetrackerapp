@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141204143823) do
+ActiveRecord::Schema.define(version: 20141205192828) do
 
   create_table "comments", force: true do |t|
     t.text     "body"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20141204143823) do
     t.integer  "customer_id"
     t.string   "status"
     t.string   "title"
+    t.integer  "user_id"
   end
 
   add_index "issues", ["customer_id"], name: "index_issues_on_customer_id"
