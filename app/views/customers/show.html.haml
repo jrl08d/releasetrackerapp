@@ -55,7 +55,7 @@
               - @issues.each do |issue|
                 - if issue.status == "new" or issue.status == "assigned" or issue.status == "resolved"
                   %tr
-                    %td= link_to issue.title, edit_issue_path(issue)
+                    %td= link_to issue.title, issue
                     %td= issue.reported_date
                     %td{:class => "#{issue.status}" }= issue.status
                     %td= issue.software_version
@@ -77,7 +77,7 @@
               - @issues.each do |issue|
                 - if issue.status == "closed"
                   %tr
-                    %td= link_to issue.title, edit_issue_path(issue)
+                    %td= link_to issue.title, issue
                     %td= issue.reported_date
                     %td{:class => "#{issue.status}" }
                       = issue.status
