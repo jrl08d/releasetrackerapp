@@ -19,7 +19,8 @@
     =f.label :reported_date, :style => "float:left; margin-right:31px; margin-left:-140px"
  
     = f.text_field :reported_date, as: :datepicker, type: "date", value: "#{Date.today}", :input_html => {:required => true}, class: 'form-control'
+  %br
   .hidden 
-    = f.association :customer, class: "hidden" 
+    = f.association :customer, class: "hidden"
   .actions.customer_update_button
     = f.submit @issue.new_record? ? "Submit" : "Submit", :class => 'btn btn-info' 
