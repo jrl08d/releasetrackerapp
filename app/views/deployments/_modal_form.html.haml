@@ -8,9 +8,9 @@
   } do |f|                                                           |
   = f.error_notification
   .field.customer_form
-    =f.label :deploy_date, :style => "float:left; margin-right:72px; margin-left:-20px"
+    =f.label :deploy_date, :style => "float:left; margin-right:31px; margin-left:-167px"
 
-    = f.text_field :deploy_date, as: :datepicker, type: "date", value: "#{Date.today}", :input_html => {:required => true}, class: 'form-control reg-form', :validate => { :presence => true, :uniqueness => true}
+    = f.text_field :deploy_date, as: :datepicker, type: "date", value: "#{Date.today}", :input_html => {:required => true}, class: 'form-control', :validate => { :presence => true, :uniqueness => true}
 
   .hidden
     = f.association :customer, value: @customer

@@ -16,9 +16,9 @@
     = f.input :severity, collection: ["low", "medium", "high"], :input_html => {:required => true}
     = f.input :status, collection: ["new", "assigned", "resolved", "closed", "rejected"],:selected => "new", :input_html => {:required => true}
   .field.customer_form
-    =f.label :reported_date, :style => "float:left; margin-right:31px; margin-left:-38px"
+    =f.label :reported_date, :style => "float:left; margin-right:31px; margin-left:-140px"
  
-    = f.text_field :reported_date, as: :datepicker, type: "date", value: "#{Date.today}", :input_html => {:required => true}, class: 'form-control reg-form'
+    = f.text_field :reported_date, as: :datepicker, type: "date", value: "#{Date.today}", :input_html => {:required => true}, class: 'form-control'
   .hidden 
     = f.association :customer, class: "hidden" 
   .actions.customer_update_button

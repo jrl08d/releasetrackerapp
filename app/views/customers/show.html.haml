@@ -163,7 +163,7 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
         %h4#myModalLabel.modal-title New Deployment
       .modal-body
-        =render "deployments/form"
+        =render "deployments/modal_form"
       .modal-footer
         %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
 #myNewIssueModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "windowTitleLabel", :role => "dialog", :tabindex => "-1"}
@@ -173,16 +173,6 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
         %h4#myModalLabel.modal-title Edit User
       .modal-body
-        =render "issues/form"
-      .modal-footer
-        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-#myEditDeploymentModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "windowTitleLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-dialog.issue
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
-        %h4#myModalLabel.modal-title Edit Deployment
-      .modal-body
-        =render "deployments/form"
+        =render "issues/modal_form"
       .modal-footer
         %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
