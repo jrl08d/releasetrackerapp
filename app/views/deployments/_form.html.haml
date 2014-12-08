@@ -1,4 +1,4 @@
-= simple_form_for @deployment, html: { class: 'form-horizontal' },     |
+= simple_form_for @deployment, :validate => true, html: { class: 'form-horizontal' },     |
   wrapper: :horizontal_form,                                         |
   wrapper_mappings: {                                                |
     check_boxes: :horizontal_radio_and_checkboxes,                   |
@@ -8,11 +8,12 @@
   } do |f|                                                           |
   = f.error_notification
   .field.customer_form
-    =f.label :deploy_date, :style => "float:left; margin-right:31px; margin-left:-24px"
+    =f.label :deploy_date, :style => "float:left; margin-right:31px; margin-left:-167px"
 
-    = f.text_field :deploy_date, as: :datepicker, type: "date", value: "#{Date.today}", :input_html => {:required => true}, class: 'form-control'
-  .hidden 
-    = f.association :customer, class: "hidden"
+    = f.text_field :deploy_date, as: :datepicker, type: "date", value: "#{Date.today}", :input_html => {:required => true}, class: 'form-control', :validate => { :presence => true, :uniqueness => true}
+
+  .hidden
+    = f.association :customer, value: @customer
   .form-group.customer_form
     = f.association :release, :label_method => :version, :value_method => :id,:input_html => {:required => true}
   .actions.customer_update_button

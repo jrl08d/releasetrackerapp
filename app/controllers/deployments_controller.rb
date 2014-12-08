@@ -38,7 +38,7 @@ class DeploymentsController < ApplicationController
   # GET /deployments/new
   def new
     @deployment = Deployment.new
-    authorize! :create, @deployment
+    @customer = @deployment.customer
   end
 
   # GET /deployments/1/edit
@@ -54,7 +54,7 @@ class DeploymentsController < ApplicationController
 
     respond_to do |format|
       if @deployment.save
-        format.html { redirect_to deployments_path, notice: 'Deployment was successfully created.' }
+        format.html { redirect_to :back, notice: 'Deployment was successfully created.' }
         format.json { render :show, status: :created, location: @deployment }
       else
         format.html { render :new }
@@ -107,6 +107,6 @@ class DeploymentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def deployment_params
-      params.require(:deployment).permit(:deploy_date, :customer_id, :release_id, :version)
+      params.require(:deployment).permit(:deploy_date, :customer_id, :release_id, :version, :user_id)
     end
 end

@@ -1,5 +1,12 @@
-%h1 New deployment
 
-= render 'form'
+#login_body.col-md-6
+#login_form.panel.panel-primary
+  .panel-heading New Deployment
+  .panel-body
+    = render "form"
+%span.btn.btn-default.btn-xs
+  = link_to customers_path do 
+    %i.fa.fa-long-arrow-left
+    Back
 
-= link_to 'Back', deployments_path
+

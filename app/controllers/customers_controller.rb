@@ -35,7 +35,6 @@ class CustomersController < ApplicationController
   def show
     authorize! :update, @customer
     authorize! :read, @customer
-    @customer.users.build if @customer.users.none?
     get_customer_data
   end
 
@@ -125,7 +124,7 @@ class CustomersController < ApplicationController
     end
 
     def get_customer_data
-      @deployment = @customer.deployments.build
+      @deployment = Deployment.new(:customer => @customer)
       @issue = @customer.issues.build
       @search = @customer.issues.search(params[:q])
       @issues = @search.result.paginate(:page => params[:page], :per_page => 12)

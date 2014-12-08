@@ -1,7 +1,21 @@
-%h1 Editing deployment
 
-= render 'form'
+#login_body.col-md-6
+#login_form.panel.panel-primary
+  .panel-heading.upper-panel-heading
+    Edit Deployment
+    %span.customer_panel_heading
+      Customer: #{"#{@deployment.customer.name}"} 
+  .pannel-body
+    = render 'form'
 
-= link_to 'Show', @deployment
-\|
-= link_to 'Back', deployments_path
+
+%span.btn.btn-default.btn-xs
+  = link_to :back do 
+    %i.fa.fa-long-arrow-left
+    Back
+	
+%span
+  = link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), @deployment, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default btn-sm"
+
+
+
