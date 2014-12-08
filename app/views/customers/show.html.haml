@@ -55,10 +55,10 @@
             - @customer.deployments.each do |deployment|
               %li
                 %strong
-                  = deployment.deploy_date 
+                  = deployment.release.try(:version)
                 %br
                 .grey
-                  = deployment.release.try(:version)
+                  = deployment.deploy_date
                   = link_to edit_customer_deployment_path(@customer, deployment), :class => "btn btn-info btn-sm customer_edit" do
                     %i.fa.fa-edit
                     Edit Deployment
