@@ -1,7 +1,7 @@
 %p
   %h1
     = @issue.title
-    %small Issue for: #{@issue.customer.name} -- Running Version: #{@issue.software_version}
+    %small Issue for: #{link_to @issue.customer.name, customer_path(@issue.customer)} -- Running Version: #{@issue.software_version}
     %span.add_button
       - if can? :manage, Issue
         = link_to edit_issue_path(@issue), :class => "btn btn-primary btn-md" do
