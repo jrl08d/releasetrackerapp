@@ -4,7 +4,9 @@
 = form_tag customers_path, :method => 'get', :id => "customers_search", :class => "form-search form-inline" do
   %p
     = text_field_tag :search, params[:search], :class => "form-control", :placeholder => "Search Customers"
-    = submit_tag "Search", :name => nil, :class => "btn btn-info btn-md"
+    = button_tag(type: "submit", class: "btn btn-info btn-md") do
+      %i.fa.fa-search
+      Search
     %span.add_button
       = link_to new_customer_path, :class => "btn btn-success btn-md" do
         %i.fa.fa-plus
