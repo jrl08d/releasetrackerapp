@@ -28,6 +28,7 @@
             %i.fa.fa-plus &nbsp; New User
         %hr
         %ul.customer_user_tab
+        -if @customer.users.length > 0
 
           - @customer.users.each do |user|
             %li
@@ -38,6 +39,8 @@
                 = user.email
                 %a.btn.btn-info.btn-sm.customer_edit{"data-target" => "#myUserModal", "data-toggle" => "modal", :href => "#"}
                   %i.fa.fa-edit &nbsp; Edit User
+        - else
+          = render "issues/issue_table_body"
       #tab2.tab-pane
         %h3.customer_user_title 
           Deployments
@@ -45,6 +48,7 @@
             %i.fa.fa-plus &nbsp; New Deployment
         %hr
         %ul.customer_user_tab
+        - if @customer.deployments.length > 0
           - @customer.deployments.each do |deployment|
             %li
               %strong
@@ -55,6 +59,8 @@
                 = link_to edit_customer_deployment_path(@customer, deployment), :class => "btn btn-info btn-sm customer_edit" do
                   %i.fa.fa-edit
                   Edit Deployment
+        - else
+          = render "issues/issue_table_body"
       #tab3.tab-pane
         %h3.customer_user_title 
           Open Issues
